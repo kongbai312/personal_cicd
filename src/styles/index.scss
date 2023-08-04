@@ -1,0 +1,67 @@
+:root{
+    //导航 logo颜色
+    --sw-narbar-logo: #409eff;
+    //导航激活边框颜色
+    --sw-narbar-border:#409eff;
+    //回到顶部背景颜色
+    --sw-back-top: #409EFF;
+    //回到顶部文字颜色
+    --sw-back-top-color: #fff;
+    //回到顶部 hover颜色
+    --sw-back-top-hover : #FF7242;
+    // 底部文字颜色
+    --sw-footer-color : #eee;
+    // 底部背景颜色
+    --sw-footer-bg-color: linear-gradient(-45deg, #ee7752, #ce3e75, #23a6d5, #23d5ab);
+    // 底部tag背景颜色
+    --sw-footer-tag-bg-color: #5B5B5B;
+    //中间卡片文章置顶按钮文字颜色
+    --sw-center-article-top: #ec8c69;
+    //中间卡片文章更多按钮文字颜色
+    --sw-center-article-more:#fff;
+    //中间卡片文章更多按钮背景颜色
+    --sw-center-article-more-bg:linear-gradient(to right,#ec8c69 0,#ed6ea0 100%);
+    //中间卡片文章标题文字颜色
+    --sw-center-article-title:#e9546b;
+    //中间卡片文章文字颜色
+    --sw-center-article-text:#333;
+    //after背景颜色
+    --sw-after-bg-color: transparent;
+    //关于部分名字颜色
+    --sw-about-name-color:#303133;
+    //文章目录背景颜色
+    --sw-article-catalog-bg-color: #FFFFFF;
+    //文章目录边框颜色
+    --article-catalog-border-color: #eef2f8;
+    //文章内容背景颜色
+    --article-content-bg-color: #FFFFFF;
+    //文章归档小圆点边框颜色
+    --sw-article-circle-border-color: #49b1f5;
+    //文章归档小圆点边框颜色
+    --sw-article-circle-bg-color: #fff;
+    //文章归档小圆点hover颜色
+    --sw-article-circle-hover-color: #ec8c69;
+    //文章归档标题颜色
+    --sw-article-title-hover-color: #e9546b;
+    //标签列表时间文字颜色
+    --sw-labelList-time-color: #999;
+    //标签列表标签Icon颜色
+    --sw-labelList-label-color: #8a5ec0;
+    //标签列表标签背景颜色
+    --sw-labelList-label-bg-color: #fdf8ff; 
+    //分类页面背景颜色
+    --sw-classify-bg-color: #fff;
+    //about部分commit文字
+    --sw-about-commit-color: #000000;
+    @keyframes bgAnimation {
+        0% {
+          background-position: 0 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0 50%;
+        }
+    }
+}

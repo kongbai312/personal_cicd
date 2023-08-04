@@ -1,0 +1,31 @@
+[
+    {
+        "id":1,
+        "title":"名字的由来",
+        "contentClass":"second_content",
+        "refId":0,
+        "content":[
+            "首先，原来的名字不是这个，之前的名字为空白，英文Blank，意在一片空白，任由想象。想象力足够丰，天马行空，映入囊中。",
+            "再后来，见识到了许多大佬。认识到了自己无时无刻是一个小白。小白小白，中文式翻译，Small White，就叫Swhite好了，很简单随意吧！",
+            "⌓‿⌓"
+        ]
+    },
+    {
+        "id":2,
+        "title":"项目涉及",
+        "contentClass":"tag_content",
+        "refId":1,
+        "content":[
+            "· Vue3 （ 渐进式框架 ）",
+            "· TypeScript （ 编程语言 ）",
+            "· Pinia （ 状态管理工具 ）",
+            "· VueRouter （ 为 Vue 提供可配置的路由 ）",
+            "· Axios （ 基于 Promise 的网络请求库 ）",
+            "· Element Plus （ 基于 Vue3 的组件库 ）",
+            "· Sass （ CSS 的预处理器 ）",
+            "· VueUse （ 基于 Vue 组合式API的工具集 ）",
+            "· Live2d （ 基于 2D 图形的动态表现技术 ）",
+            "· Mockjs （ 模拟后端接口 ）"
+        ]
+    }
+]

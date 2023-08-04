@@ -1,0 +1,58 @@
+// 黑暗模式颜色
+html.dark {
+    /* 自定义深色背景颜色 */
+    //导航 logo颜色
+    --sw-narbar-logo: #E5EAF3;
+    //导航激活边框颜色
+    --sw-narbar-border:#E5EAF3;
+    //回到顶部背景颜色
+    --sw-back-top: #1F1F1F;
+    //回到顶部文字颜色
+    --sw-back-top-color: rgba(255,255,255,0.7);
+    //回到顶部 hover颜色
+    --sw-back-top-hover : #787878;
+    // 底部文字颜色
+    --sw-footer-color : #eee;
+    // 底部背景颜色
+    --sw-footer-bg-color : rgba(0,0,0,0.5);
+    // 底部tag背景颜色
+    --sw-footer-tag-bg-color: #4A4A4A;
+    //中间卡片文章置顶按钮文字颜色
+    --sw-center-article-top: rgba(240, 163, 135, .8);
+    //中间卡片文章更多按钮文字颜色
+    --sw-center-article-more:#222;
+    //中间卡片文章更多按钮背景颜色
+    --sw-center-article-more-bg:linear-gradient(to right,rgba(240, 163, 135, .8) 0,rgba(241, 139, 179, .8) 100%);
+    //中间卡片文章标题文字颜色
+    --sw-center-article-title:rgba(237, 118, 137, .9);
+    //中间卡片文章文字颜色
+    --sw-center-article-text:#aaa;
+    //after背景颜色
+    --sw-after-bg-color: rgb(127,127,127,0.3);
+    //关于部分名字颜色
+    --sw-about-name-color:#111;
+    //文章目录背景颜色
+    --sw-article-catalog-bg-color: #202020;
+    //文章目录边框颜色
+    --article-catalog-border-color: #2f2f2f;
+    //文章内容背景颜色
+    --article-content-bg-color: #1E1E1E;
+    //文章归档小圆点边框颜色
+    --sw-article-circle-border-color: #9cd0ed;
+    //文章归档小圆点边框颜色
+    --sw-article-circle-bg-color: #222;
+    //文章归档小圆点hover颜色
+    --sw-article-circle-hover-color: rgba(240, 163, 135, .8);
+    //文章归档标题颜色
+    --sw-article-title-hover-color: rgba(237, 118, 137, .9);
+    //标签列表时间文字颜色
+    --sw-labelList-time-color: #aaa;
+    //标签列表时间文字颜色
+    --sw-labelList-label-color: rgba(109, 164, 219, .8);
+    //标签列表标签背景颜色
+    --sw-labelList-label-bg-color: rgba(48, 49, 50, .8); 
+    //分类页面背景颜色
+    --sw-classify-bg-color: #021425;
+    //about部分commit文字
+    --sw-about-commit-color: #767676;
+}

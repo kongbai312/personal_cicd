@@ -1,0 +1,30 @@
+[
+    {
+        "id" : 1,
+        "title":"说 说",
+        "img":"/src/assets/q1.jpg",
+        "path":"/talk",
+        "index": 0
+    },
+    {
+        "id" : 2,
+        "title":"相 册",
+        "img":"/src/assets/q2.jpg",
+        "path":"/album",
+        "index": 1
+    },
+    {
+        "id" : 3,
+        "title":"留 言",
+        "img":"/src/assets/q3.jpg",
+        "path":"/leaveword",
+        "index": 2
+    },
+    {
+        "id" : 4,
+        "title":"网 站",
+        "img":"/src/assets/q4.jpg",
+        "path":"/web",
+        "index": 3
+    }
+]

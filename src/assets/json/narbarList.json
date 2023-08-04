@@ -1,0 +1,30 @@
+[
+    {
+        "id":1,
+        "title":"首页",
+        "path":"/personal",
+        "icon":"icon-zhuye",
+        "index":"personal"
+    },
+    {
+        "id":2,
+        "title":"文章",
+        "path":"/articles",
+        "icon":"icon-wenzhang",
+        "index":"articles"
+    },
+    {
+        "id":3,
+        "title":"休闲",
+        "path":"/relax",
+        "icon":"icon-xiuxian",
+        "index":"relax"
+    },
+    {
+        "id":4,
+        "title":"关于",
+        "path":"/about",
+        "icon":"icon-guanyu",
+        "index":"about"
+    }
+]

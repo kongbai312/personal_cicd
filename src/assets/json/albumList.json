@@ -1,0 +1,14 @@
+[
+    {
+        "id" :1,
+        "image":"https://pic.imgdb.cn/item/64c4bcd71ddac507cc35faa0.jpg",
+        "title": "精选壁纸",
+        "text": "图片"
+    },
+    {
+        "id" :2,
+        "image":"https://pic.imgdb.cn/item/64c4bcd71ddac507cc35faa0.jpg",
+        "title": "测试壁纸",
+        "text": "图片"
+    }
+]

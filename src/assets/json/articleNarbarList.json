@@ -1,0 +1,30 @@
+[
+    {
+        "id":1,
+        "title":"文章",
+        "path":"/articles",
+        "icon":"icon-wenzhang",
+        "index":"articles"
+    },
+    {
+        "id":2,
+        "title":"归档",
+        "path":"/archive",
+        "icon":"icon-guidang",
+        "index":"archive"
+    },
+    {
+        "id":3,
+        "title":"分类",
+        "path":"/classify",
+        "icon":"icon-fenlei",
+        "index":"classify"
+    },
+    {
+        "id":4,
+        "title":"标签",
+        "path":"/label",
+        "icon":"icon-biaoqian",
+        "index":"label"
+    }
+]
