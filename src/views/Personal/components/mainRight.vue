@@ -8,7 +8,7 @@
         <template #default>
             <div class="right_elCard_content">
                 <div class="imgContainer">
-                    <el-image class="imgClass" fit="cover" src="/src/assets/images/homeCenter.png"></el-image>
+                    <el-image class="imgClass" fit="cover" :src="HomeCenterPng"></el-image>
                 </div>
                 <div class="textContainer">
                     <span class="name">Swhite</span>
@@ -43,6 +43,7 @@
 
 <script setup lang='ts'>
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import HomeCenterPng from '@/assets/images/homeCenter.png'
 // 日历实例
 const calendar = ref()
 

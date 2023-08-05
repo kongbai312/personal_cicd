@@ -35,8 +35,8 @@ const live2dInit = () => {
     //   canvas:'live2dcanvas'//自定义cavas标签的id（可不需要,默认live2dcanvas）
     // },
     model: { 
-      // jsonPath: '/src/assets/live2dw/live2d-widget-model-shizuku/assets/shizuku.model.json',
-      jsonPath:'/node_modules/live2d-widget-model-shizuku/assets/shizuku.model.json',
+      jsonPath: import.meta.env.VITE_APP_LIVEPATH,
+      // jsonPath:'/node_modules/live2d-widget-model-shizuku/assets/shizuku.model.json',
       scale:1,//模型与canvas的缩放 
     },
     display: { 

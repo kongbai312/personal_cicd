@@ -55,6 +55,18 @@ export default ( { mode }) => {
     },
     //github部署
     // base: env.MODE === 'production' ? '/personaltsup/' : './'
-    base: './'
+    base: './',
+    // 打包配置
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets',
+      sourcemap: false,
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
+    },
   })
 }
