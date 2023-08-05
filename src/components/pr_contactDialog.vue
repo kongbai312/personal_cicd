@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang='ts'>
-import WeChatImg from '@/assets/wechat.jpg';
-import QQImg from '@/assets/qq.jpg';
+import WeChatImg from '@/assets/images/contact/wechat.jpg';
+import QQImg from '@/assets/images/contact/qq.jpg';
     let { activeIcon = 'qq', modelValue } = defineProps<{
         // 当前点击的联系方式
         activeIcon : string,

@@ -22,7 +22,7 @@ import { useRouter } from 'vue-router';
 
 <style lang="scss" scoped>
     .error_container{
-        cursor: url(../../assets/default.cur),auto;
+        cursor: url(../../assets/cursor/default.cur),auto;
         height: 100vh;
         width: 100vw;
         display: flex;
@@ -66,7 +66,7 @@ import { useRouter } from 'vue-router';
                     display: flex;
                     align-items: center;
                     position: relative;
-                    cursor: url(../../assets/link.cur),pointer;
+                    cursor: url(../../assets/cursor/link.cur),pointer;
                     .iconfont{
                         font-size: 38px;
                         margin-right: 10px;

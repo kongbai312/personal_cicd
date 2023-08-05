@@ -122,7 +122,7 @@ import { useRouter } from 'vue-router';
         border-radius: 20px;
         margin-bottom: 20px;
         position: relative;
-        cursor: url('../../../assets/link.cur'),pointer;
+        cursor: url('../../../assets/cursor/link.cur'),pointer;
         &::after{
           content: "";
           position: absolute;

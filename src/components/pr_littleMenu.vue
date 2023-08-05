@@ -95,7 +95,7 @@ import { useUsuallyStore } from '@/stores/modules/usually';
                 align-items: center;
                 border-radius: 30px;
                 margin-bottom: 25px;
-                cursor: url(../assets/link.cur), pointer;
+                cursor: url(../assets/cursor/link.cur), pointer;
                 color: #999;
                 &:hover{
                     background-color: #0000001a;

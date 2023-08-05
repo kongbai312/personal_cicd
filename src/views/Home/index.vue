@@ -139,7 +139,7 @@ onMounted(() => {
           right: 0;
           bottom: 0;
           margin: auto;
-          background: url(../../assets/homeCenter.png) no-repeat;
+          background: url(../../assets/images/homeCenter.png) no-repeat;
           background-size: cover;
           border-radius: 50%;
           z-index: 3;

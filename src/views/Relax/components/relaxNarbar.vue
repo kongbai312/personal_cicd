@@ -75,7 +75,7 @@ import { useRouter } from 'vue-router';
             border-radius: 50%;
             overflow: hidden;
             &:hover{
-              cursor: url(../../../assets/link.cur),pointer;
+              cursor: url(../../../assets/cursor/link.cur),pointer;
               .carouselItem_img{
                 transform: scale(1.1);
               }

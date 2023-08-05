@@ -10,7 +10,7 @@
                             <div class="header_content">
                                 <div class="name">
                                     <span>{{ item.name }}</span>
-                                    <img class="nameImg" src="/src/assets/bigV.png" alt="">
+                                    <img class="nameImg" src="/src/assets/images/bigV.png" alt="">
                                 </div>
                                 <span class="createTime">{{item.createTime}}</span>
                             </div>

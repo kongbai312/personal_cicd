@@ -5,7 +5,7 @@
             <el-image 
                 :preview-src-list="preImgList" 
                 class="aboutCard_header_image" 
-                src="/src/assets/homeCenter.png" 
+                src="/src/assets/images/homeCenter.png" 
                 alt="" 
                 :hide-on-click-modal="true"
             />
@@ -40,7 +40,7 @@
 import { ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
    //图片预览
-  let preImgList = ref(['/src/assets/homeCenter.png'])
+  let preImgList = ref(['/src/assets/images/homeCenter.png'])
   
   //技术列表
   let technologyList = ref([

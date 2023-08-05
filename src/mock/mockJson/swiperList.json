@@ -3,21 +3,21 @@
         "id":1,
         "articleId": 1,
         "title": "欢迎光临~",
-        "image":"/src/assets/swiper1.jpg",
+        "image":"https://pic.imgdb.cn/item/64cdf3b01ddac507cc054de3.webp",
         "createTime":"2023-07-06"
     },
     {
         "id":2,
         "articleId": 3,
         "title": "项目介绍",
-        "image":"/src/assets/swiper2.jpg",
+        "image":"https://pic.imgdb.cn/item/64cdf3c31ddac507cc0581f7.jpg",
         "createTime":"2023-07-07"
     },
     {
         "id":3,
         "articleId": 4,
         "title": "测试文章",
-        "image":"/src/assets/swiper3.jpg",
+        "image":"https://pic.imgdb.cn/item/64cdf3d51ddac507cc05b6dc.jpg",
         "createTime":"2023-07-08"
     }
 ]

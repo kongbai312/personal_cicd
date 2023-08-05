@@ -49,7 +49,7 @@ import type { TypedOptions } from "@duskmoon/vue3-typed-js";
   }
 }
 .personal_bigImg_container{
-    background: url(../../../assets/personalBigImg.jpg) no-repeat;
+    background: url(../../../assets/images/personalBigImg.jpg) no-repeat;
     width: 100vw;
     height: calc(100vh - 80px);
     // height: 100vh;

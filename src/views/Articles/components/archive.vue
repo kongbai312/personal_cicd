@@ -197,7 +197,7 @@ import { useRouter } from 'vue-router';
             -webkit-line-clamp: 1;
             font-size: 34px;
             transition: all .2s ease-in-out 0s;
-            cursor: url(../../../assets/link.cur),pointer;
+            cursor: url(../../../assets/cursor/link.cur),pointer;
             &:hover{
               color: var(--sw-article-title-hover-color);
               transform: translate(10px);

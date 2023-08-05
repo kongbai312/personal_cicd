@@ -174,7 +174,7 @@ import { useRouter } from 'vue-router';
           }
           .article_more:hover{
             transform: scale(1.05);
-            cursor: url(../../../assets/link.cur), pointer;
+            cursor: url(../../../assets/cursor/link.cur), pointer;
           }
         }
         // 右侧

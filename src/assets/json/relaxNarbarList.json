@@ -2,28 +2,28 @@
     {
         "id" : 1,
         "title":"说 说",
-        "img":"/src/assets/q1.jpg",
+        "img":"https://pic.imgdb.cn/item/64cdf4701ddac507cc076b1a.jpg",
         "path":"/talk",
         "index": 0
     },
     {
         "id" : 2,
         "title":"相 册",
-        "img":"/src/assets/q2.jpg",
+        "img":"https://pic.imgdb.cn/item/64cdf4701ddac507cc076b75.jpg",
         "path":"/album",
         "index": 1
     },
     {
         "id" : 3,
         "title":"留 言",
-        "img":"/src/assets/q3.jpg",
+        "img":"https://pic.imgdb.cn/item/64cdf4701ddac507cc076b34.jpg",
         "path":"/leaveword",
         "index": 2
     },
     {
         "id" : 4,
         "title":"网 站",
-        "img":"/src/assets/q4.jpg",
+        "img":"https://pic.imgdb.cn/item/64cdf4701ddac507cc076b64.jpg",
         "path":"/web",
         "index": 3
     }

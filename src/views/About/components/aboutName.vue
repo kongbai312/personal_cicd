@@ -189,7 +189,7 @@ const goTo = ( goToTarget : number ) => {
             .second_title{
                 display: flex;
                 align-items: center;
-                cursor: url(../../../assets/link.cur),pointer;
+                cursor: url(../../../assets/cursor/link.cur),pointer;
                 &:hover{
                     color: #409eff;
                 }

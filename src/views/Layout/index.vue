@@ -20,7 +20,7 @@ import Footer from '@/views/Footer/index.vue';
 
 <style lang="scss" scoped>
   .layout_container{
-    cursor: url(../../assets/default.cur), auto;
+    cursor: url(../../assets/cursor/default.cur), auto;
   }
   
 </style>

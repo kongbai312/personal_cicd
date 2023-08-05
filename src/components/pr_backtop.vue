@@ -90,7 +90,7 @@
             border: none;
             &:hover{
                 background-color: var(--sw-back-top-hover);
-                cursor: url(../assets/link.cur), pointer;
+                cursor: url(../assets/cursor/link.cur), pointer;
             }
             i{
                 display: flex;

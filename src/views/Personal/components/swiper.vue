@@ -86,7 +86,7 @@ import { useRouter } from 'vue-router';
                 align-items: center;
                 z-index: 1;
                 color: #fff;
-                cursor: url(../../../assets/link.cur),pointer;
+                cursor: url(../../../assets/cursor/link.cur),pointer;
                 .swiperItem_title{
                     font-size: 60px;
                 }

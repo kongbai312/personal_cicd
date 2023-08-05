@@ -9,8 +9,8 @@
     <!-- Logo -->
     <el-menu-item index="logo" class="logo_menuItem">
         <template #default>
-            <img v-if="!isDark" class="logo" src="@/assets/personalLogo.png" alt="" />
-            <img v-else class="logo" src="@/assets/personalLogo2.png" alt="" />
+            <img v-if="!isDark" class="logo" src="@/assets/images/personalLogo.png" alt="" />
+            <img v-else class="logo" src="@/assets/images/personalLogo2.png" alt="" />
         </template>
     </el-menu-item>
     <div class="flex-grow flex-grow-phone"></div>
@@ -122,7 +122,7 @@ import narbarList from '@/assets/json/narbarList.json';
             font-weight: 700;
             color: var(--sw-narbar-logo);
             &:hover{
-                cursor: url(../assets/link.cur), pointer;
+                cursor: url(../assets/cursor/link.cur), pointer;
             }
         }
         //开关
@@ -132,7 +132,7 @@ import narbarList from '@/assets/json/narbarList.json';
                 background-color: transparent;
             }
             &:hover{
-                cursor: url(../assets/link.cur), pointer;
+                cursor: url(../assets/cursor/link.cur), pointer;
                 background-color: transparent;
             }
             .switch_icon{
@@ -192,7 +192,7 @@ import narbarList from '@/assets/json/narbarList.json';
         //禁止点击
         .is-disabled{
             opacity: 1;
-            cursor: url(../assets/link.cur), pointer;
+            cursor: url(../assets/cursor/link.cur), pointer;
         }
     }
 

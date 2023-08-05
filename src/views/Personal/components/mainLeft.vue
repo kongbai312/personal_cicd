@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang='ts'>
-import CardImg from '@/assets/homeCenter.png';
+import CardImg from '@/assets/images/homeCenter.png';
 import { useMouseInElement } from '@vueuse/core';
 import { useMenuIconClick } from '@/hooks';
 import { useRouter } from 'vue-router';
@@ -193,7 +193,7 @@ import { useRouter } from 'vue-router';
                     height: 54px;
                     line-height: 54px;
                     border-right:1px var(--el-color-info) solid;
-                    cursor: url(../../../assets/link.cur), pointer;
+                    cursor: url(../../../assets/cursor/link.cur), pointer;
                     &:last-child{
                         border-right:none;
                     }
@@ -250,7 +250,7 @@ import { useRouter } from 'vue-router';
                 font-size: 32px;
                 color: var(--el-text-color-regular);
                 transition: all 0.3s ease 0.4s;
-                cursor: url(../../../assets/link.cur), pointer;
+                cursor: url(../../../assets/cursor/link.cur), pointer;
                 &:hover{
                     color: var(--el-color-primary);
                 }

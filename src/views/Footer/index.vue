@@ -99,7 +99,7 @@ import { useRouter } from 'vue-router';
         .cardItem{
           display: flex;
           &:hover{
-            cursor: url(../../assets/link.cur), pointer;
+            cursor: url(../../assets/cursor/link.cur), pointer;
           }
           .tagbox{
             box-sizing: border-box;

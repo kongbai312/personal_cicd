@@ -51,7 +51,7 @@ import AlbumList from '@/assets/json/albumList.json';
           height: 400px;
           background: #000;
           border-radius: 30px;
-          cursor: url(../../../assets/link.cur),pointer;
+          cursor: url(../../../assets/cursor/link.cur),pointer;
           &:hover{
             .albumItem_content{
               .text{

@@ -18,7 +18,7 @@
                 <div class="drawer_container">
                     <!-- 头像 -->
                     <div class="drawer_img">
-                        <img src="../assets/homeCenter.png" alt="">
+                        <img src="../assets/images/homeCenter.png" alt="">
                     </div>
                     <!-- 内容 -->
                     <div class="drawer_content">
@@ -118,7 +118,7 @@ import { useMenuIconClick } from '@/hooks';
         align-items: center;
         justify-content: center;
         padding: 50px 0;
-        cursor: url(../assets/default.cur),auto;
+        cursor: url(../assets/cursor/default.cur),auto;
         // 头像
         .drawer_img{
             img{
@@ -151,7 +151,7 @@ import { useMenuIconClick } from '@/hooks';
                     height: 70px;
                     line-height: 70px;
                     border-right:1px var(--el-color-info) solid;
-                    cursor: url(../assets/link.cur), pointer;
+                    cursor: url(../assets/cursor/link.cur), pointer;
                     &:last-child{
                         border-right:none;
                     }
@@ -179,7 +179,7 @@ import { useMenuIconClick } from '@/hooks';
                 align-items: center;
                 border-radius: 30px;
                 margin-bottom: 25px;
-                cursor: url(../assets/link.cur), pointer;
+                cursor: url(../assets/cursor/link.cur), pointer;
                 color: #999;
                 &:hover{
                     background-color: #0000001a;

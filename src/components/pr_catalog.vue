@@ -33,7 +33,7 @@
         animation: bgAnimation 10s ease infinite;
         user-select: none;
         &:hover{
-            cursor: url(../assets/link.cur),pointer;
+            cursor: url(../assets/cursor/link.cur),pointer;
         }
     }
 

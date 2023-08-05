@@ -8,7 +8,7 @@
         <template #default>
             <div class="right_elCard_content">
                 <div class="imgContainer">
-                    <el-image class="imgClass" fit="cover" src="/src/assets/homeCenter.png"></el-image>
+                    <el-image class="imgClass" fit="cover" src="/src/assets/images/homeCenter.png"></el-image>
                 </div>
                 <div class="textContainer">
                     <span class="name">Swhite</span>
