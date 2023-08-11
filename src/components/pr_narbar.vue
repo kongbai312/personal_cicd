@@ -77,7 +77,8 @@ import narbarList from '@/assets/json/narbarList.json';
         }
         //点击标题
         if(key === 'title'){
-            window.location.href = import.meta.env.VITE_APP_URL + '/home'
+            // window.location.href = import.meta.env.VITE_APP_URL + '/home'
+            router.push('/home')
             return
         }
         //如果是导航列表的存在

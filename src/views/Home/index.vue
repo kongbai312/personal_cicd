@@ -19,6 +19,7 @@
 import { onMounted } from 'vue';
 import { L2Dwidget } from 'live2d-widget'; 
 import { useRouter } from 'vue-router';
+import { useUsuallyStore } from '@/stores';
 
 //引入router
 const router = useRouter()
@@ -26,7 +27,7 @@ const router = useRouter()
 //live2d初始化
 const live2dInit = () => {
   window.L2Dwidget.init({
-    pluginRootPath: '/live2d/',//插件在站点上的根目录(相对路径)
+    pluginRootPath: '/personaltsup/live2d/',//插件在站点上的根目录(相对路径)
     pluginJsPath: 'lib/',//脚本文件相对与插件根目录路径
     pluginModelPath: 'live2d-widget-model-shizuku/assets/',//模型文件相对与插件根目录路径
     tagMode: false,//标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
@@ -35,11 +36,11 @@ const live2dInit = () => {
     //   canvas:'live2dcanvas'//自定义cavas标签的id（可不需要,默认live2dcanvas）
     // },
     model: { 
-      // jsonPath: import.meta.env.VITE_APP_LIVEPATH,
+      jsonPath: import.meta.env.VITE_APP_LIVEPATH,
       // jsonPath: '/public/live2d/live2d-widget-model-shizuku/assets/shizuku.model.json',
       // jsonPath:'/node_modules/live2d-widget-model-shizuku/assets/shizuku.model.json',
       // jsonPath:'https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json',
-      jsonPath: '/live2d/live2d-widget-model-shizuku/assets/shizuku.model.json',
+      // jsonPath: '/live2d/live2d-widget-model-shizuku/assets/shizuku.model.json',
       scale:1,//模型与canvas的缩放 
     },
     display: { 
@@ -70,7 +71,26 @@ const live2dInit = () => {
   })
 }
 
+//引入store
+const store = useUsuallyStore()
+
+//主页加载 避免mock带来的影响
+const homeLoad = () => {
+  //如果是第一次加载首页
+  if(store.isFirstHome === true){
+    //修改加载状态
+    store.setIsFirstHome(false)
+  }
+  else{//如果不是第一次加载，说明回退，或者其他
+    //重新加载主页
+    location. reload()
+    //修改状态 变回第一次加载
+    store.setIsFirstHome(true)
+  }
+}
 onMounted(() => {
+  homeLoad()
+  console.log(store.isFirstHome)
   live2dInit()
 })
 

@@ -3,6 +3,9 @@ import { defineStore } from 'pinia';
 export const useUsuallyStore = defineStore('sw-usually',() => {
     //存储主题状态 true是黑夜 ， false是白天
     let themeStatus = ref(false)
+    
+    //是否第一次加载首页
+    let isFirstHome = ref(true)
 
     //当前导航激活的是哪个
     let navbarActiveItem = ref('personal')
@@ -25,13 +28,20 @@ export const useUsuallyStore = defineStore('sw-usually',() => {
         isOpen.value = val
     }
 
+    //修改是否第一次加载主页
+    const setIsFirstHome = ( val : boolean ) => {
+        isFirstHome.value = val
+    }
+
     return{
         themeStatus,
         setThemeStatus,
         navbarActiveItem,
         setNavbarActiveItem,
         isOpen,
-        setIsOpen
+        setIsOpen,
+        isFirstHome,
+        setIsFirstHome
     }
 },{
     // 配置持久化
