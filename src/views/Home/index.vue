@@ -76,6 +76,7 @@ const store = useUsuallyStore()
 
 //主页加载 避免mock带来的影响
 const homeLoad = () => {
+  console.log(store.isFirstHome)
   //如果是第一次加载首页
   if(store.isFirstHome === true){
     //修改加载状态
@@ -90,7 +91,6 @@ const homeLoad = () => {
 }
 onMounted(() => {
   homeLoad()
-  console.log(store.isFirstHome)
   live2dInit()
 })
 

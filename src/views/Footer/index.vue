@@ -24,7 +24,7 @@
         </el-tooltip>
       </div>
       <div class="visitTpye">
-        您正在访问的是: Swhite's Nest 电脑端
+        您正在访问的是: Swhite's Nest {{ clientText }}
       </div>
     </div>
   </div>
@@ -32,6 +32,7 @@
 
 <script setup lang='ts'>
 import { useRouter } from 'vue-router';
+import { useWindowSize } from '@vueuse/core';
 
   //引入router
   const router = useRouter()
@@ -51,6 +52,14 @@ import { useRouter } from 'vue-router';
       window.open('https://github.com/kongbai312','_blank')
     }
   }
+
+  // 窗口长宽
+  const { width } = useWindowSize()
+
+  // 客户端提示
+  let clientText = computed(() => {
+    return width.value <= 500 ? '移动端' : "PC端"
+  })
 </script>
 
 <style lang="scss" scoped>
