@@ -53,6 +53,9 @@
     --sw-classify-bg-color: #fff;
     //about部分commit文字
     --sw-about-commit-color: #000000;
+    //留言部分背景颜色
+    --sw-leaveword-bg-color: #fff;
+
     @keyframes bgAnimation {
         0% {
           background-position: 0 50%;

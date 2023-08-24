@@ -58,6 +58,9 @@ dependencies:
   vue3-calendar-heatmap:
     specifier: ^2.0.5
     version: registry.npmmirror.com/vue3-calendar-heatmap@2.0.5(tippy.js@6.3.7)(vue@3.3.4)
+  vue3-danmaku:
+    specifier: ^1.5.1
+    version: registry.npmmirror.com/vue3-danmaku@1.5.1(vue@3.3.4)
 
 devDependencies:
   '@iconify-json/ep':
@@ -4891,6 +4894,17 @@ packages:
       vue: ^3.2.29
     dependencies:
       tippy.js: registry.npmmirror.com/tippy.js@6.3.7
+      vue: registry.npmmirror.com/vue@3.3.4
+    dev: false
+
+  registry.npmmirror.com/vue3-danmaku@1.5.1(vue@3.3.4):
+    resolution: {integrity: sha512-EwJmvOi9Up2+XAvR27whkvBM5kvVU/I3JFIVx2uJsQSPWdIfGnVgBZwNqjrTaVFjPtIVJRrRiAg3P4X18mD0pg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue3-danmaku/-/vue3-danmaku-1.5.1.tgz}
+    id: registry.npmmirror.com/vue3-danmaku/1.5.1
+    name: vue3-danmaku
+    version: 1.5.1
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
       vue: registry.npmmirror.com/vue@3.3.4
     dev: false
 
