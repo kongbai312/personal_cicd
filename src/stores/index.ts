@@ -10,3 +10,4 @@ export default pinia
 
 // 统一暴露模块
 export * from './modules/usually';
+export * from './modules/user';

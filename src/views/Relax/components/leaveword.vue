@@ -1,6 +1,7 @@
 <template>
   <div class="leaveword_container">
     <vue-danmaku 
+      ref="danmuRef"
       v-model:danmus="danmus" 
       class="danmu_style"
       :top="6" 
@@ -8,7 +9,7 @@
       useSlot
     >
       <template v-slot:dm="{ index, danmu }">
-        <div class="danmuItem">
+        <div class="danmuItem" :class="{danmuItem_active : index === danmuIndex}">
           <img class="danmuItem_img" src="https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp"  />
           <span class="danmuItem_text">{{ danmu.name }}：{{ danmu.text }}</span>
         </div>
@@ -35,7 +36,8 @@
 
 <script setup lang='ts'>
   import vueDanmaku from 'vue3-danmaku';
-
+  import { getIp } from '@/utils/getIp';
+  import { useUserStore } from '@/stores';
   //用户头像
   const userAvatar = [
     'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp',
@@ -76,9 +78,43 @@
     show.value = true
   }
 
+  //引入store
+  const store = useUserStore()
+
+  //获取用户信息
+  const getUserInfo = async () => {
+    if( !store.userInfo?.ip){//如果没有用户信息
+      let result = await getIp()
+      //存储本地
+      store.setUserInfo(result)
+    }
+  }
+
+  //用户信息
+  let userInfo = computed(() => {
+    return store.userInfo
+  })
+
+  onMounted( async () => {
+    await getUserInfo()
+  })
+
+
+  //弹幕展示ref
+  let danmuRef = ref()
+
+  //当前插入的弹幕编号
+  let danmuIndex = ref()
+
   // 添加弹幕
   const addDanmu = () => {
-    alert(danmuText.value)
+    // 添加弹幕
+    danmuIndex.value = danmuRef.value.add({
+      id: danmus.value.length + 1,
+      name:`${userInfo.value.address}用户`,
+      text: danmuText.value,
+      avatar:''
+    })
     //清空input
     danmuText.value = ''
     //隐藏按钮
@@ -115,6 +151,13 @@
         .danmuItem_text{
           color: #fff;
         }
+        
+        
+      }
+      //当前激活弹幕
+      .danmuItem_active{
+        box-sizing: border-box;
+        border: 1px solid #FFC3C3;
       }
     }
 
@@ -130,14 +173,14 @@
       bottom: 0;
       margin: auto;
       width: 600px;
-      height: 300px;
+      height: 260px;
       //标题
       .leaveword_title{
         display: inline-block;
         font-size: 50px;
       }
       .leaveword_inputBox{
-        margin-top: 40px;
+        margin-top: 60px;
         display: flex;
         // 输入
         .leaveword_input{
@@ -162,6 +205,7 @@
           line-height: 80px;
           font-size: 26px;
           border-radius: 40px;
+          color: #eee;
           cursor: url(../../../assets/cursor/link.cur),pointer;
         }
       }

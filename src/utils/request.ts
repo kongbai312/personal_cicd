@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const baseURL = 'https://api.github.com/repos';
+// const baseURL = 'https://api.github.com/repos';
 
 const request = axios.create({
-    baseURL,
+    // baseURL,
     timeout: 10000
 })
 
