@@ -56,3 +56,29 @@ export const useRandomBg = () => {
     //返回随机的图片地址
     return imgArr[index]
 }
+
+//随机生成一个男/女头像  男 0 女 1 随机 2
+export const useRandomAvatar = ( sex : 0 | 1 | 2 ) => {
+    //女头
+    const girlAvatars = [
+        'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp',
+        'https://pic.imgdb.cn/item/64e73250661c6c8e54b3b20e.webp',
+        'https://pic.imgdb.cn/item/64e732cc661c6c8e54b3c920.jpg'
+    ]
+
+    //男头
+    const boyAvatars = [
+        'https://pic.imgdb.cn/item/64ea22c7661c6c8e5456e4ff.webp',
+        'https://pic.imgdb.cn/item/64ea2325661c6c8e5456f684.webp',
+        'https://pic.imgdb.cn/item/64ea236e661c6c8e54570014.webp'
+    ]
+
+    //两个整合
+    const allAvatars = [...boyAvatars,...girlAvatars]
+
+    //生成一个 0 至 图片数组长度的随机数
+    let index = Math.round(Math.random() * ( (sex !== 2 ? girlAvatars.length : allAvatars.length) - 1))
+
+    // 0返回男头 1返回女头 2随机返回
+    return sex === 2 ? allAvatars[index] : ( sex === 1 ? girlAvatars[index] : boyAvatars[index])
+}

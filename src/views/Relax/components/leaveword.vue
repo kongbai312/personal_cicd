@@ -10,7 +10,7 @@
     >
       <template v-slot:dm="{ index, danmu }">
         <div class="danmuItem" :class="{danmuItem_active : index === danmuIndex}">
-          <img class="danmuItem_img" src="https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp"  />
+          <img class="danmuItem_img" :src="danmu.avatar"  />
           <span class="danmuItem_text">{{ danmu.name }}：{{ danmu.text }}</span>
         </div>
       </template>
@@ -23,7 +23,7 @@
         <input 
           class="leaveword_input" 
           @keyup.enter="addDanmu" 
-          placeholder="说点什么吧！"
+          placeholder="留下你的足迹吧！"
           @focus="leavewordInputFocus"
           v-model="danmuText" 
           clearable 
@@ -38,12 +38,7 @@
   import vueDanmaku from 'vue3-danmaku';
   import { getIp } from '@/utils/getIp';
   import { useUserStore } from '@/stores';
-  //用户头像
-  const userAvatar = [
-    'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp',
-    'https://pic.imgdb.cn/item/64e73250661c6c8e54b3b20e.webp',
-    'https://pic.imgdb.cn/item/64e732cc661c6c8e54b3c920.jpg'
-  ]
+  import { useRandomAvatar } from '@/hooks'
 
   //弹幕
   const danmus = ref([
@@ -51,19 +46,19 @@
       id:1,
       name:'用户1',
       text:'文字1',
-      avatar:''
+      avatar:'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp'
     },
     {
       id:2,
       name:'用户2',
       text:'文字2',
-      avatar:''
+      avatar:'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp'
     },
     {
       id:3,
       name:'用户3',
       text:'文字3',
-      avatar:''
+      avatar:'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp'
     }
   ])
 
@@ -113,7 +108,7 @@
       id: danmus.value.length + 1,
       name:`${userInfo.value.address}用户`,
       text: danmuText.value,
-      avatar:''
+      avatar: useRandomAvatar(2)
     })
     //清空input
     danmuText.value = ''
