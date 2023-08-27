@@ -4,7 +4,7 @@ import mockRequest from '@/utils/mockRequest';
 import type { ActicleType,SwiperType,AnnouncementType} from '@/types/personal';
 import type { AboutDataType } from '@/types/about';
 import type { ArticlesByPageType } from '@/types/articles';
-import type { TalkType } from '@/types/relax'
+import type { TalkType, DanmuType } from '@/types/relax';
 
 //获取文章列表
 export const getArticleListApi = () => mockRequest<ActicleType[]>('/articles')
@@ -47,5 +47,13 @@ export const getAlbumApi = ( data : { id: number, pageSize : number, page :numbe
         url:'/album',
         method:'post',
         data
+    })
+}
+
+//获取弹幕列表
+export const getDanmuApi = () => {
+    return mockRequest<DanmuType[]>({
+        url:'/danmu',
+        method:'get',
     })
 }

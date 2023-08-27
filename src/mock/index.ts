@@ -13,7 +13,9 @@ import AnnouncementJson from './mockJson/announcementList.json';
 //关于界面的数据
 import AboutJson from './mockJson/aboutData.json';
 //说说列表
-import TalkJson from './mockJson/talkData.json'
+import TalkJson from './mockJson/talkData.json';
+//弹幕数据
+import DanmuJson from './mockJson/danmuData.json';
 
 //引入处理函数
 import { getPageArticles } from './modules/articles';
@@ -55,3 +57,6 @@ Mock.mock('/mock/talk','get',handleData(TalkJson))
 
 //相册数据
 Mock.mock('/mock/album','post', getAlbum)
+
+//弹幕数据
+Mock.mock('/mock/danmu','get',handleData(DanmuJson))

@@ -9,3 +9,11 @@ export type TalkType = {
     comment : string ,
     imageList : string[]
 }
+
+//弹幕部分
+export type DanmuType = {
+    id : number ,
+    name : string ,
+    avatar : string ,
+    text : string
+}

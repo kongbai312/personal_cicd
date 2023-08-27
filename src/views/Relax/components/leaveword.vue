@@ -38,29 +38,23 @@
   import vueDanmaku from 'vue3-danmaku';
   import { getIp } from '@/utils/getIp';
   import { useUserStore } from '@/stores';
-  import { useRandomAvatar } from '@/hooks'
+  import { useRandomAvatar } from '@/hooks';
+  import { getDanmuApi } from '@/api/mock_api';
+  import '@/mock'
 
   //弹幕
-  const danmus = ref([
-    {
-      id:1,
-      name:'用户1',
-      text:'文字1',
-      avatar:'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp'
-    },
-    {
-      id:2,
-      name:'用户2',
-      text:'文字2',
-      avatar:'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp'
-    },
-    {
-      id:3,
-      name:'用户3',
-      text:'文字3',
-      avatar:'https://pic.imgdb.cn/item/64e72e54661c6c8e54b2bc7e.webp'
-    }
-  ])
+  const danmus = ref()
+
+  //获取弹幕列表
+  const getDanmu = async () => {
+    let result = await getDanmuApi()
+    danmus.value = result.data
+    //通过ref播放弹幕
+    danmuRef.value.play()
+  }
+  onMounted(() => {
+    getDanmu()
+  })
 
   //input绑定内容
   let danmuText = ref()
@@ -76,6 +70,11 @@
   //引入store
   const store = useUserStore()
 
+  //用户信息
+  let userInfo = computed(() => {
+    return store.userInfo
+  })
+
   //获取用户信息
   const getUserInfo = async () => {
     if( !store.userInfo?.ip){//如果没有用户信息
@@ -84,11 +83,6 @@
       store.setUserInfo(result)
     }
   }
-
-  //用户信息
-  let userInfo = computed(() => {
-    return store.userInfo
-  })
 
   onMounted( async () => {
     await getUserInfo()
