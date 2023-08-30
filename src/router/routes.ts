@@ -64,6 +64,7 @@ const routes = [
                     title:'文章中心'
                 }
             },
+            // 标签中心
             {
                 path:'/labelList/:label?',
                 component: () => import('@/views/Articles/components/labelList.vue'),
@@ -71,6 +72,7 @@ const routes = [
                     title:'标签中心'
                 }
             },
+            // 休闲
             {
                 path:'/relax',
                 component: () => import('@/views/Relax/index.vue'),
@@ -78,6 +80,7 @@ const routes = [
                     title:'休闲'
                 }
             },
+            // 说说
             {
                 path:'/talk',
                 component: () => import('@/views/Relax/components/talk.vue'),
@@ -85,6 +88,7 @@ const routes = [
                     title:'说说'
                 }
             },
+            // 相册
             {
                 path:'/album',
                 component: () => import('@/views/Relax/components/album.vue'),
@@ -105,11 +109,20 @@ const routes = [
                     title:'留言'
                 }
             },
+            // 关于
             {
                 path:'/about',
                 component: () => import('@/views/About/index.vue'),
                 meta:{
                     title:'关于'
+                }
+            },
+            //用户中心
+            {
+                path:'/user',
+                component : () => import('@/views/User/index.vue'),
+                meta:{
+                    title:'用户中心'
                 }
             }
         ]

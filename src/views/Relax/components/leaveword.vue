@@ -40,7 +40,7 @@
   import { useUserStore } from '@/stores';
   import { useRandomAvatar } from '@/hooks';
   import { getDanmuApi } from '@/api/mock_api';
-  import '@/mock'
+  import '@/mock';
 
   //弹幕
   const danmus = ref()
@@ -87,7 +87,6 @@
   onMounted( async () => {
     await getUserInfo()
   })
-
 
   //弹幕展示ref
   let danmuRef = ref()

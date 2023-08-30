@@ -11,6 +11,7 @@
         <!-- 右半部分 -->
         <MainRight></MainRight>
       </div>
+      <Login></Login>
   </div>
   
 </template>
@@ -20,6 +21,8 @@ import BigImg from './components/bigImg.vue';
 import MainLeft from './components/mainLeft.vue';
 import MainCenter from './components/mainCenter.vue';
 import MainRight from './components/mainRight.vue';
+import Login from './components/login.vue'
+
 </script>
 
 <style lang="scss" scoped>

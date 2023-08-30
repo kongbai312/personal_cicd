@@ -1,6 +1,6 @@
 <template>
     <transition name="el-zoom-in-top">
-      <div class="about_header" :class="{isCenter:position}" v-show="showAboutHeader">
+      <div class="about_header" :class="{isCenter:position, isRight : right}" v-show="showAboutHeader">
         <span class="about_header_title" v-for="(item,index) in titleArr" :key="index">{{ item }}</span>
       </div>
     </transition>
@@ -9,22 +9,23 @@
 <script setup lang='ts'>
 import { ref,onMounted } from 'vue';
 
-    //显示头部
-    let showAboutHeader = ref(false)
-    onMounted(()=>{
-        showAboutHeader.value = true
-    })
+  //显示头部
+  let showAboutHeader = ref(false)
+  onMounted(()=>{
+    showAboutHeader.value = true
+  })
 
-    // 接收数据
-    let { img = 'https://pic.imgdb.cn/item/64ae6b561ddac507cc1464c1.jpg',position = true} = defineProps<{
-        titleArr? : string[],
-        img?: string,
-        position?:boolean
-    }>()
-    //   计算图片url
-    let url = computed(() => {
-        return `url(${img})`
-    })
+  // 接收数据
+  let { img = 'https://pic.imgdb.cn/item/64ae6b561ddac507cc1464c1.jpg',position = true, right = false} = defineProps<{
+    titleArr? : string[],
+    img?: string,
+    position?:boolean,
+    right?:boolean
+  }>()
+  //   计算图片url
+  let url = computed(() => {
+    return `url(${img})`
+  })
 
 </script>
 
@@ -58,6 +59,9 @@ import { ref,onMounted } from 'vue';
     }
     .isCenter{
       background-position: center;
+    }
+    .isRight{
+      background-position: right;
     }
 
     @media (max-width: 600px) {

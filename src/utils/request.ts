@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { useUserStore } from '@/stores'; 
 // const baseURL = 'https://api.github.com/repos';
 
 const request = axios.create({
@@ -7,10 +7,16 @@ const request = axios.create({
     timeout: 10000
 })
 
+//引入store
+const store = useUserStore()
+
 //请求拦截器
 request.interceptors.request.use(
     config => {
-        
+        let token = store.userInfo?.token
+        if( token !== undefined){
+            config.headers.token = token
+        }
         return config
     },
     error => {

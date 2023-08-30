@@ -62,6 +62,7 @@ import CardImg from '@/assets/images/homeCenter.png';
 import { useMouseInElement } from '@vueuse/core';
 import { useMenuIconClick } from '@/hooks';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores';  
 
    //图片预览数组
     let preImgList = [CardImg]
@@ -70,6 +71,9 @@ import { useRouter } from 'vue-router';
     //当前点击的联系方式    activeIcon
     //图标点击事件  iconClick
     let { showDialog, activeIcon, iconClick } = useMenuIconClick()
+
+    //引入store
+    const store = useUserStore()
 
     //引入router
     const router = useRouter()
@@ -85,7 +89,8 @@ import { useRouter } from 'vue-router';
             router.push('/leaveword')
         }
         else if(key === 'login'){
-            ElMessage.info('登录功能还在开发哦(｡･∀･)ﾉﾞ')
+            // ElMessage.info('登录功能还在开发哦(｡･∀･)ﾉﾞ')
+            store.setShowLoginDialog(true)
         }
     }
 
