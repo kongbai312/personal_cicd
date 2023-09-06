@@ -1,6 +1,14 @@
 //用户模块api
 import request from '@/utils/request';
-import type { GetCodeApiType, LoginType, RegisterApiType, LoginApiType } from '@/types/user'
+import type { 
+    GetCodeApiType, 
+    LoginType, 
+    RegisterApiType, 
+    LoginApiType , 
+    GetDetailUserInfoApiType ,
+    SetDetailUserInfoApiType ,
+    UserDetailInfoType
+} from '@/types/user'
 
 //根地址
 let baseUrl = 'https://api.apiopen.top'
@@ -36,8 +44,17 @@ export const loginApi = ( form : LoginType) => {
 
 //获取自己的详细用户信息
 export const getDetailUserInfoApi = () => {
-    return request({
+    return request<GetDetailUserInfoApiType,GetDetailUserInfoApiType>({
         url: baseUrl + '/api/getUserInfo',
         method:'get'
+    })
+}
+
+//修改自己的详细用户信息
+export const setDetailUserInfoApi = ( form : UserDetailInfoType ) => {
+    return request<SetDetailUserInfoApiType,SetDetailUserInfoApiType>({
+        url: baseUrl + '/api/updateUserInfo',
+        method: 'post',
+        data : form
     })
 }

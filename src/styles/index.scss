@@ -55,6 +55,12 @@
     --sw-about-commit-color: #000000;
     //留言部分背景颜色
     --sw-leaveword-bg-color: #fff;
+    //个人中心提交按钮
+    --sw-user-btn-bg-color: #409EFF;
+    //个人中心提交按钮文字颜色
+    --sw-user-btn-color: #fff;
+    //个人中心提交按钮 hover颜色
+    --sw-user-btn-hover : #FF7242;
 
     @keyframes bgAnimation {
         0% {

@@ -20,6 +20,23 @@ export type RegisterApiType = {
     result : object
 }
 
+//获取详情信息接口的返回类型
+export type GetDetailUserInfoApiType = {
+  code : number,
+  message :string,
+  result : UserDetailInfoType
+}
+
+//修改详情信息接口的返回类型
+export type SetDetailUserInfoApiType = {
+  code : number,
+  message :string,
+  result : UserDetailInfoType
+}
+
+//获取用户详情信息的返回类型
+export type DetailUserInfoApiType = RegisterApiType
+
 //登录接口的返回类型
 export type LoginApiType = RegisterApiType
 
@@ -38,11 +55,14 @@ export type UserInfoType = {
     updatedAt?: {
       "time.Time"?: string
     }
-    detail?:{
-        birthday? : string,
-        blurb? : string,
-        "head_url"? : string,
-        name? : string,
-        updatedAt? : string
-    }
+    detail? : UserDetailInfoType
+}
+
+//用户详情信息
+export type UserDetailInfoType = {
+    birthday? : string,
+    blurb? : string,
+    "head_url"? : string,
+    name? : string,
+    updatedAt? : string
 }

@@ -2,11 +2,10 @@
   <div class="login_container">
     <el-dialog 
         class="loginDialog"
-        :model-value="showLoginDialog" 
+        :model-value="true" 
         @close="close"
         @open="open"
         :close-on-click-modal="false"
-        width="30%"
     >
         <el-form :model="loginForm" :rules="rules" ref="loginFormRef">
             <el-form-item prop="account">
@@ -204,7 +203,7 @@ import { useRouter } from 'vue-router';
     .login_container{
         ::v-deep(){
             .loginDialog{
-                
+                width: 30%;
                 background-color: #F1F3F9;
                 .el-dialog__header{
                     margin: 0;
@@ -311,6 +310,72 @@ import { useRouter } from 'vue-router';
                     }
                 }
             }
+        }
+    }
+
+
+    @media (max-width: 700px) {
+        .login_container{
+            ::v-deep(){ 
+                .loginDialog{
+                    width: 60%;
+                    .el-dialog__header{
+                        .el-dialog__headerbtn{
+                            font-size: 20px;
+                        }
+                    }
+                    .el-dialog__body{
+                        padding: 30px 15px 15px;
+                        .formInput{
+                            height: 25px;
+                            .el-input__wrapper{
+                                .el-input__inner{
+                                    height: 20px;
+                                }
+                                .el-input__suffix{
+                                    .el-input__suffix-inner{
+                                        .el-input__icon{
+                                            font-size: 16px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        // 登录按钮
+                        .loginBtn{
+                            border-radius: 5px;
+                            line-height: 30px;
+                            margin: 0 20px;
+                            height: 30px;
+                            font-size: 12px;
+                        }
+                        // 立即注册 忘记密码
+                        .textBox{
+                            padding: 5px 0;
+                            height: 40px;
+                            font-size: 10px;
+                        }
+                        // 社交账号登录
+                        .socialBox{
+                            .socialTitle{
+                                &::before,&::after{
+                                    width: 40px;
+                                    margin: 0 8px;
+                                }
+                            }
+                            .svgBox{
+                                margin-top: 10px;
+                                .svgIcon{
+                                    padding: 0 10px;
+                                    width: 30px;
+                                    height: 30px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
         }
     }
 </style>
