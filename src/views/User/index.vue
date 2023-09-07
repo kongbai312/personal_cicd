@@ -45,6 +45,7 @@
                                         value-format="YYYY-MM-DD"
                                         :default-value="defaultTime"
                                         :disabled-date="disabledDate"
+                                        :teleported="false"
                                     />
                                 </el-config-provider>
                             </el-form-item>
@@ -288,6 +289,12 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
         .user_container{
             .user_content{
                 .userCard{
+                    overflow: inherit;
+                    ::v-deep(){
+                        .el-card__body{
+                            overflow: inherit;
+                        }
+                    }
                     border-radius: 10px;
                     // 头像
                     .headerImg_box{
@@ -344,6 +351,105 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
                                         }
                                     }
                                 }
+                                //日期选择
+                                .el-popper{
+                                    .el-picker-panel{
+                                        width: 250px;
+                                        .el-picker-panel__body-wrapper{
+                                            .el-picker-panel__body{
+                                                //头部
+                                                .el-date-picker__header{
+                                                    margin: 10px 5px;
+                                                    //左按钮
+                                                    .el-date-picker__prev-btn{
+                                                        height: 20px;
+                                                        line-height: 20px;
+                                                        //前一年
+                                                        .d-arrow-left{
+                                                            margin-top: 0;
+                                                            font-size: 14px;
+                                                            .el-icon{
+                                                                height: 20px;
+                                                                line-height: 20px;
+                                                            }
+                                                        }
+                                                        //前一个月
+                                                        .arrow-left{
+                                                            margin-top: 0;
+                                                            font-size: 14px;
+                                                            .el-icon{
+                                                                height: 20px;
+                                                                line-height: 20px;
+                                                            }
+                                                        }
+                                                    }
+                                                    .el-date-picker__header-label{
+                                                        font-size: 12px;
+                                                        height: 20px;
+                                                        line-height: 20px;
+                                                    }
+                                                    //右按钮
+                                                    .el-date-picker__next-btn{
+                                                        height: 20px;
+                                                        line-height: 20px;
+                                                        //前一年
+                                                        .d-arrow-right{
+                                                            margin-top: 0;
+                                                            font-size: 14px;
+                                                            .el-icon{
+                                                                height: 20px;
+                                                                line-height: 20px;
+                                                            }
+                                                        }
+                                                        //前一个月
+                                                        .arrow-right{
+                                                            margin-top: 0;
+                                                            font-size: 14px;
+                                                            .el-icon{
+                                                                height: 20px;
+                                                                line-height: 20px;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                //内容
+                                                .el-picker-panel__content{
+                                                    width: 250px;
+                                                    margin: 0;
+                                                    .el-date-table{
+                                                        padding-left: 5px;
+                                                        padding-bottom: 5px;
+                                                        tr{
+                                                            th{
+                                                                box-sizing: border-box;
+                                                                padding: 5px;
+                                                                font-size: 12px;
+                                                            }
+                                                            td{
+                                                                box-sizing: border-box;
+                                                                height: 30px;
+                                                                width: 30px;
+                                                                .el-date-table-cell{
+                                                                    box-sizing: border-box;
+                                                                    width: 30px;
+                                                                    height: 30px;
+                                                                    .el-date-table-cell__text{
+                                                                        width: 30px;
+                                                                        height: 30px;
+                                                                        line-height: 30px;
+                                                                        text-align: center;
+                                                                        left: auto;
+                                                                        transform: translate(0);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 //下拉选项
                                 .el-form-item__content{
                                     .el-cascader{
@@ -351,6 +457,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
                                             width: 200px;
                                             height: 30px;
                                             .el-input__wrapper{
+                                                padding: 1px 5px;
                                                 border-radius: 5px;
                                                 .el-input__inner{
                                                     height: 20px;
