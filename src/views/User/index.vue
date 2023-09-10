@@ -51,10 +51,12 @@
                             </el-form-item>
                             <el-form-item label="头像" prop="head_url" class="formItem">
                                 <el-cascader
+                                    class="avatarSelect"
                                     v-model="userDetailInfo['head_url']"
                                     :options="headerUrlOptions"
                                     :props="headerUrlProp"
                                     placeholder="选择你的头像"
+                                    :teleported="false"
                                 />
                             </el-form-item>
                             <el-form-item label="更新" prop="updatedAt" class="formItem">
@@ -349,6 +351,14 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
                                             height: 20px;
                                             font-size: 9px;
                                         }
+                                        //图标
+                                        .el-input__suffix{
+                                            .el-input__suffix-inner{
+                                                .el-icon{
+                                                    font-size: 12px;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 //日期选择
@@ -463,10 +473,56 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
                                                     height: 20px;
                                                     font-size: 9px;
                                                 }
+                                                //图标
+                                                .el-input__suffix{
+                                                    .el-input__suffix-inner{
+                                                        .el-icon{
+                                                            font-size: 12px;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    //下拉选择框
+                                    .el-cascader__dropdown{
+                                        .el-cascader-panel{
+                                            .el-scrollbar{
+                                                width: 150px;
+                                                .el-cascader-menu__wrap{
+                                                    height: 100px;
+                                                    .el-scrollbar__view{
+                                                        padding: 5px 10px;
+                                                        .el-cascader-node{
+                                                            height: 30px;
+                                                            line-height: 30px;
+                                                            .el-cascader-node__label{
+                                                                font-size: 12px;
+                                                            }
+                                                            .el-icon{
+                                                                font-size: 12px;
+                                                            }
+                                                            .el-cascader-node__prefix{
+                                                                position: absolute;
+                                                                left: inherit;
+                                                                right: 0;
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                 }
+                            }
+                        }
+                        //按钮
+                        .btnBox{
+                            .btnItem{
+                                height: 30px;
+                                line-height: 30px;
+                                width: 100px;
+                                border-radius: 5px;
                             }
                         }
                     }

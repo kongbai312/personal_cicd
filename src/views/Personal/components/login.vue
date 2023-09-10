@@ -2,7 +2,7 @@
   <div class="login_container">
     <el-dialog 
         class="loginDialog"
-        :model-value="true" 
+        :model-value="showLoginDialog" 
         @close="close"
         @open="open"
         :close-on-click-modal="false"
@@ -278,6 +278,7 @@ import { useRouter } from 'vue-router';
                         height: 50px;
                         font-size: 18px;
                         .textItem{
+                            color: var(--sw-login-color);
                             cursor: url(../../../assets/cursor/link.cur),pointer;
                         }
                     }
