@@ -14,7 +14,7 @@ const store = useUserStore()
 request.interceptors.request.use(
     config => {
         let token = store.userInfo?.token
-        if( token !== undefined){
+        if( token !== undefined && token !== ""){
             config.headers.token = token
         }
         return config

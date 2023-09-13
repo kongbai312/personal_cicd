@@ -39,7 +39,7 @@
                     <div class="drawer_menu">
                         <div 
                             class="drawer_menuItem" :class="{active:item.index === activeMenu}"
-                            v-for="item in narbarList"
+                            v-for="item in narbarArr"
                             :key="item.id"
                             @click="menuClick(item.path)"
                         >
@@ -60,6 +60,15 @@
 import narbarList from '@/assets/json/narbarList.json';
 import { useRoute, useRouter } from 'vue-router';
 import { useMenuIconClick } from '@/hooks';
+    
+    let narbarArr = [...narbarList,{
+        "id":5,
+        "title":"个人中心",
+        "path":"/user",
+        "icon":"icon-zuozhe",
+        "index":"user"
+    }]
+
     //是否激活抽屉
     let isActive = ref(false)
     //更改抽屉状态

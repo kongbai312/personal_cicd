@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 
-import routes from './routes'
+import routes from './routes';
+//引入store
+import { useUserStore } from '@/stores';
 
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,8 +29,28 @@ const router = createRouter({
 router.beforeEach((to,from,next) => {
   //每次页面更改的时候改变网页标题
   document.title = `Swhite's小窝-${to.meta.title || '页面'}`
-  //放行
-  next()
+  //store
+  let store = useUserStore()
+  //token
+  let token = store.userInfo.token
+  if(!!token){
+    //放行
+    next()
+  }
+  else{//没登陆
+    if( to.path === '/user'){//且要去用户中心
+      //提示
+      ElMessage.info('您还未登录')
+      //跳转
+      router.push('/personal')
+      //弹出登录框
+      store.setShowLoginDialog(true)
+    }
+    else{//其他地方放行
+      //放行
+      next()
+    }
+  }
 })
 
 export default router

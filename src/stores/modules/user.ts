@@ -17,6 +17,11 @@ export const useUserStore = defineStore('sw-user',() => {
     const setUserDetailInfo = ( detail : object ) => {
         userInfo.value.detail = detail
     }
+    
+    //修改用户位置信息
+    const setUserPosition = ( position : object ) => {
+        userInfo.value.position = position
+    }
 
     //修改弹层显示隐藏
     const setShowLoginDialog = ( value : boolean ) => {
@@ -28,7 +33,8 @@ export const useUserStore = defineStore('sw-user',() => {
         setUserInfo,
         showLoginDialog,
         setShowLoginDialog,
-        setUserDetailInfo
+        setUserDetailInfo,
+        setUserPosition
     }
 },{
     // 配置持久化

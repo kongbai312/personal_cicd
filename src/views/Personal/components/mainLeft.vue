@@ -47,7 +47,7 @@
                         v-on:mouseenter="enterMethod('login','enter')" 
                         v-on:mouseleave="leaveMethod('login','leave')"
                         @click="leftNarbarClick('login')"
-                    ><span>登</span><span>录</span></div>
+                    ><span>{{ isLogin ? '用' : '登'}}</span><span>{{ isLogin ? '户' : '录'}}</span></div>
                 </div>
             </template>
         </el-card>
@@ -75,6 +75,11 @@ import { useUserStore } from '@/stores';
     //引入store
     const store = useUserStore()
 
+    //是否登录
+    let isLogin = computed(() => {
+        return store.userInfo.token === '' || store.userInfo.token === undefined ? false : true
+    })
+
     //引入router
     const router = useRouter()
     //左侧导航条点击函数
@@ -90,7 +95,14 @@ import { useUserStore } from '@/stores';
         }
         else if(key === 'login'){
             // ElMessage.info('登录功能还在开发哦(｡･∀･)ﾉﾞ')
-            store.setShowLoginDialog(true)
+            if(isLogin.value){//已经登录了
+                router.push('/user')
+            }
+            else{
+                //弹出登录窗口
+                store.setShowLoginDialog(true)
+            }
+            
         }
     }
 

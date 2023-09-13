@@ -84,7 +84,7 @@ const homeLoad = () => {
   }
   else{//如果不是第一次加载，说明回退，或者其他
     //重新加载主页
-    location. reload()
+    location.reload()
     //修改状态 变回第一次加载
     store.setIsFirstHome(true)
   }

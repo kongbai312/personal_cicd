@@ -55,7 +55,8 @@ export type UserInfoType = {
     updatedAt?: {
       "time.Time"?: string
     }
-    detail? : UserDetailInfoType
+    detail? : UserDetailInfoType,
+    position? : UserPositionInfoType
 }
 
 //用户详情信息
@@ -65,4 +66,10 @@ export type UserDetailInfoType = {
     "head_url"? : string,
     name? : string,
     updatedAt? : string
+}
+
+//用户的位置信息
+export type UserPositionInfoType = {
+  ip? : string,
+  address? : string
 }

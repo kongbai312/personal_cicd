@@ -17,6 +17,10 @@
     <!-- 标题 -->
     <el-menu-item index="title" class="title_menuItem">Swhite</el-menu-item>
     <div class="flex-grow"></div>
+    <!-- 用户中心 -->
+    <el-menu-item v-if="isShowUser" index="user" class="user_menuItem">
+        <img class="user_img" src="https://pic.imgdb.cn/item/64f83419661c6c8e54f32ead.png" />
+    </el-menu-item>
     <!-- 导航条 -->
     <el-menu-item 
         :index="item.index" 
@@ -43,7 +47,7 @@
 <script setup lang='ts'>
 import { useRouter,useRoute } from 'vue-router';
 import { useDark, useToggle} from '@vueuse/core';
-import { useUsuallyStore } from '@/stores';
+import { useUsuallyStore, useUserStore } from '@/stores';
 import narbarList from '@/assets/json/narbarList.json';
     //判断是否是黑暗模式
     const isDark = useDark() 
@@ -52,6 +56,14 @@ import narbarList from '@/assets/json/narbarList.json';
 
     //引入store
     const store = useUsuallyStore()
+
+    //引入userstore
+    const userStore = useUserStore()
+
+    //是否显示用户中心
+    let isShowUser = computed(() => {
+        return userStore.userInfo.token === '' || userStore.userInfo.token === undefined ? false : true
+    })
 
     //切换主题
     const changeModel = () => {
@@ -79,6 +91,11 @@ import narbarList from '@/assets/json/narbarList.json';
         if(key === 'title'){
             // window.location.href = import.meta.env.VITE_APP_URL + '/home'
             router.push('/home')
+            return
+        }
+        //点击个人中心
+        if( key === 'user'){
+            router.push('/user')
             return
         }
         //如果是导航列表的存在
@@ -124,6 +141,18 @@ import narbarList from '@/assets/json/narbarList.json';
             color: var(--sw-narbar-logo);
             &:hover{
                 cursor: url(../assets/cursor/link.cur), pointer;
+            }
+        }
+        //用户中心
+        .user_menuItem{
+            border-bottom: none;
+            &:hover{
+                cursor: url(../assets/cursor/link.cur), pointer;
+            }
+            .user_img{
+                border-radius: 50%;
+                height: 50px;
+                width: 50px;
             }
         }
         //开关
@@ -213,6 +242,13 @@ import narbarList from '@/assets/json/narbarList.json';
             //标题
             .title_menuItem{
                 font-size: 28px;
+            }
+            //用户中心
+            .user_menuItem{
+                .user_img{
+                    width: 40px;
+                    height: 40px;
+                }
             }
             //开关
             .switch_menuItem{

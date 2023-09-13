@@ -77,10 +77,10 @@
 
   //获取用户信息
   const getUserInfo = async () => {
-    if( !store.userInfo?.ip){//如果没有用户信息
+    if( !store.userInfo.position?.ip ){//如果没有用户信息
       let result = await getIp()
       //存储本地
-      store.setUserInfo(result)
+      store.setUserPosition(result)
     }
   }
 
@@ -99,7 +99,7 @@
     // 添加弹幕
     danmuIndex.value = danmuRef.value.add({
       id: danmus.value.length + 1,
-      name:`${userInfo.value.address}用户`,
+      name:`${userInfo.value.position?.address}用户`,
       text: danmuText.value,
       avatar: useRandomAvatar(2)
     })
