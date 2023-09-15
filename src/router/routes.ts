@@ -109,6 +109,14 @@ const routes = [
                     title:'留言'
                 }
             },
+            // 留言板
+            {
+                path:'/feedback',
+                component: () => import('@/views/Relax/components/feedback.vue'),
+                meta:{
+                    title:'留言板'
+                }
+            },
             // 关于
             {
                 path:'/about',
