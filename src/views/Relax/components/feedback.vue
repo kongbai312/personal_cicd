@@ -5,6 +5,7 @@
     <!-- 内容 -->
     <div class="feedback_content">
         <el-card shadow="hover" class="feedbackCard">
+            <!-- 信 -->
             <div class="card_content">
                 <div class="card_header">
                     <img class="headerImg" src="../../../assets/images/feedback/mailUp.png" alt="">
@@ -32,7 +33,15 @@
                     <img class="headerImg" src="../../../assets/images/feedback/mailDown.png" alt="">
                 </div>
             </div>
+            <!-- 线 -->
+            <pr_line></pr_line>
+            <!-- 评论 -->
+            <div class="card_comment">
+                <pr_comment></pr_comment>
+            </div>
+            
         </el-card>
+        
     </div>
   </div>
 </template>
@@ -107,6 +116,7 @@
                                         background-color: #eee;
                                         .textItem{
                                             padding: 20px 10px;
+                                            color: #000;
                                         }
                                     }
                                     .bottom{
@@ -129,6 +139,13 @@
                         }
                     }
                 }
+
+                // 评论
+                .card_comment{
+                    padding: 40px 100px;
+                    background-color: var(--sw-comment-bg-color);
+                    clip-path: polygon(20px 20px, 0px 40px, 0px calc(100% - 20px), 20px 100%, 100px 100%, 120px calc(100% - 20px), calc(50% - 20px) calc(100% - 20px), 50% 100%, calc(100% - 20px) 100%, 100% calc(100% - 20px), 100% 40px, calc(100% - 20px) 19px, 50% 20px, calc(50% - 20px) 0px, calc(50% - 160px) 0px, calc(50% - 180px) 20px);
+                }
             }
         }
     }
@@ -145,7 +162,7 @@
                             width: 530px;
                             height: 447px;
                             &:hover{
-                                height: 1050px;
+                                height: 1100px;
                                 top: -200px
                             }
                             .headerImg{
