@@ -26,6 +26,20 @@ const album2 = [
     "https://pic.imgdb.cn/item/64c292e01ddac507cce0dad2.webp",
     "https://pic.imgdb.cn/item/64c292db1ddac507cce0d0dd.webp",
     "https://pic.imgdb.cn/item/64c4b14a1ddac507cc1f832d.jpg",
+    "https://pic.imgdb.cn/item/64c4bcd71ddac507cc35faa0.jpg",
+    "https://pic.imgdb.cn/item/64c292e01ddac507cce0dbb6.jpg",
+    "https://pic.imgdb.cn/item/64c292e01ddac507cce0dcf3.webp",
+    "https://pic.imgdb.cn/item/64c292df1ddac507cce0d99b.webp",
+    "https://pic.imgdb.cn/item/64c292e01ddac507cce0dad2.webp",
+    "https://pic.imgdb.cn/item/64c292db1ddac507cce0d0dd.webp",
+    "https://pic.imgdb.cn/item/64c4b14a1ddac507cc1f832d.jpg",
+    "https://pic.imgdb.cn/item/64c4bcd71ddac507cc35faa0.jpg",
+    "https://pic.imgdb.cn/item/64c292e01ddac507cce0dbb6.jpg",
+    "https://pic.imgdb.cn/item/64c292e01ddac507cce0dcf3.webp",
+    "https://pic.imgdb.cn/item/64c292df1ddac507cce0d99b.webp",
+    "https://pic.imgdb.cn/item/64c292e01ddac507cce0dad2.webp",
+    "https://pic.imgdb.cn/item/64c292db1ddac507cce0d0dd.webp",
+    "https://pic.imgdb.cn/item/64c4b14a1ddac507cc1f832d.jpg",
     "https://pic.imgdb.cn/item/64c4bcd71ddac507cc35faa0.jpg"
 ]
 

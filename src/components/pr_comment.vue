@@ -24,10 +24,13 @@
                 <i class="iconfont icon-biaoqing"></i>
             </template>
             <el-tabs type="border-card" tab-position="bottom" class="elTabs">
-                <el-tab-pane label="User">User</el-tab-pane>
-                <el-tab-pane label="Config">Config</el-tab-pane>
-                <el-tab-pane label="Role">Role</el-tab-pane>
-                <el-tab-pane label="Task">Task</el-tab-pane>
+                <el-tab-pane :label="keyItem" v-for="(emojiItem,keyItem) in emojiJson" :key="keyItem">
+                    <el-scrollbar class="elTab">
+                        <div class="elItem" v-for="(emoji , key) in emojiItem" :key="key">
+                            <img class="emojiItem" :src="emoji" alt="">
+                        </div>
+                    </el-scrollbar>
+                </el-tab-pane>
             </el-tabs>
         </el-popover>
     </div>
@@ -69,7 +72,6 @@ import emojiJson from '@/assets/json/emoji.json'
     let text = ref()
 
     onMounted(()=>{
-        console.log(userInfo.value.detail?.head_url === undefined)
     })
 </script>
 
@@ -132,10 +134,49 @@ import emojiJson from '@/assets/json/emoji.json'
                 font-size: 30px;
             }
             ::v-deep(){
+                // 表情弹层
                 .emojiPopover{
                     padding: 0;
                     .elTabs{
                         border: none;
+                        .el-tabs__content{
+                            padding: 0;
+                        }
+                        //滚动条
+                        .elTab{
+                            height: 200px;
+                            .el-scrollbar__wrap{
+                                .el-scrollbar__view{
+                                    padding: 15px;
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fill, minmax( 50px , 1fr ));
+                                    grid-gap: 10px 20px;
+                                    grid-template-rows: repeat(auto-fill , 50px);
+                                    .elItem{
+                                        width: 50px;
+                                        height: 50px;
+                                        cursor: url(../assets/cursor/link.cur),pointer;
+                                        &:hover{
+                                            background-color: #e3e5e7;
+                                            border-radius: 10px;
+                                        }
+                                        .emojiItem{
+                                            width: 100%;
+                                            height: 100%;
+                                            object-fit: cover;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        // 表情包标题
+                        .el-tabs__header{
+                            .el-tabs__nav-wrap{
+                                .el-tabs__item{
+                                    user-select: none;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -189,7 +230,7 @@ import emojiJson from '@/assets/json/emoji.json'
                     min-width: 60px;
                 }
             }
-            
+
             //评论区
             .comments{
                 .commentItem{
@@ -216,6 +257,67 @@ import emojiJson from '@/assets/json/emoji.json'
             // 表情
             .emoji{
                 margin-left: 60px;
+                ::v-deep(){
+                    .emojiPopover{
+                        left: 15px !important;
+                        // 箭头
+                        .el-popper__arrow{
+                            width: 8px;
+                            height: 8px;
+                            top: -4px;
+                            &::before{
+                                width: 8px;
+                                height: 8px;
+                            }
+                        }
+                        .elTabs{
+                            // 滚动条
+                            .elTab{
+                                height: 200px;
+                                .el-scrollbar__wrap{
+                                    .el-scrollbar__view{
+                                        padding: 15px;
+                                        display: grid;
+                                        grid-template-columns: repeat(auto-fill, minmax( 50px , 1fr ));
+                                        grid-gap: 10px 20px;
+                                        grid-template-rows: repeat(auto-fill , 50px);
+                                        .elItem{
+                                            width: 50px;
+                                            height: 50px;
+                                            .emojiItem{
+                                                width: 100%;
+                                                height: 100%;
+                                                object-fit: cover;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            // 表情包标题
+                            .el-tabs__header{
+                                .el-tabs__nav-wrap{
+                                    padding: 0 10px;
+                                    // 左,右箭头
+                                    .el-tabs__nav-prev,.el-tabs__nav-next{
+                                        height: 100%;
+                                        line-height: 100%;
+                                        font-size: 14px;
+                                        width: 10px;
+                                        .el-icon{
+                                            height: 100%;
+                                            line-height: 100%;
+                                            width: 10px;
+                                        }
+                                    }
+                                    .el-tabs__item{
+                                        font-size: 16px;
+                                        padding: 15px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -251,6 +353,8 @@ import emojiJson from '@/assets/json/emoji.json'
                 }
                 ::v-deep(){
                     .emojiPopover{
+                        left: 10px !important;
+                        // 箭头
                         .el-popper__arrow{
                             width: 8px;
                             height: 8px;
@@ -260,6 +364,53 @@ import emojiJson from '@/assets/json/emoji.json'
                                 height: 8px;
                             }
                         }
+                        .elTabs{
+                            // 滚动条
+                            .elTab{
+                                height: 200px;
+                                .el-scrollbar__wrap{
+                                    .el-scrollbar__view{
+                                        padding: 15px;
+                                        display: grid;
+                                        grid-template-columns: repeat(auto-fill, minmax( 50px , 1fr ));
+                                        grid-gap: 10px 20px;
+                                        grid-template-rows: repeat(auto-fill , 50px);
+                                        .elItem{
+                                            width: 50px;
+                                            height: 50px;
+                                            .emojiItem{
+                                                width: 100%;
+                                                height: 100%;
+                                                object-fit: cover;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            // 表情包标题
+                            .el-tabs__header{
+                                .el-tabs__nav-wrap{
+                                    padding: 0 10px;
+                                    // 左,右箭头
+                                    .el-tabs__nav-prev,.el-tabs__nav-next{
+                                        height: 100%;
+                                        line-height: 100%;
+                                        font-size: 14px;
+                                        width: 10px;
+                                        .el-icon{
+                                            height: 100%;
+                                            line-height: 100%;
+                                            width: 10px;
+                                        }
+                                    }
+                                    .el-tabs__item{
+                                        font-size: 14px;
+                                        padding: 14px;
+                                    }
+                                }
+                            }
+                        }
+                        
                     }
                 }
             }
