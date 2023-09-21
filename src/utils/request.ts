@@ -10,11 +10,21 @@ const request = axios.create({
 //引入store
 const store = useUserStore()
 
+//不需要带token请求头的url
+let urlList = [
+    'https://api.ipify.org',
+    'https://api.vore.top'
+]
+
 //请求拦截器
 request.interceptors.request.use(
     config => {
         let token = store.userInfo?.token
-        if( token !== undefined && token !== ""){
+        //判断是否在不需要token请求头的url数组
+        let urlArr = config.url!.split('/')
+        let index = urlList.findIndex(( item ) => item === `${urlArr[0]}//${urlArr[2]}`)
+        //判断是否添加token请求头
+        if( token !== undefined && token !== "" && index === -1){
             config.headers.token = token
         }
         return config

@@ -15,18 +15,25 @@
             type="textarea"
             placeholder="评论区很精彩，期待你的评论！"
         />
-        <div class="content_button">评论</div>
+        <div class="content_button" @click="setComment">评论</div>
     </div>
     <!-- 表情 -->
     <div class="emoji">
-        <el-popover width="300px" placement="bottom" trigger="click" popper-class="emojiPopover" :teleported="false">
+        <el-popover 
+            width="300px" 
+            placement="bottom" 
+            trigger="click" 
+            popper-class="emojiPopover" 
+            :teleported="false"
+            v-model:visible="showPopover"
+        >
             <template #reference>
                 <i class="iconfont icon-biaoqing"></i>
             </template>
             <el-tabs type="border-card" tab-position="bottom" class="elTabs">
                 <el-tab-pane :label="keyItem" v-for="(emojiItem,keyItem) in emojiJson" :key="keyItem">
                     <el-scrollbar class="elTab">
-                        <div class="elItem" v-for="(emoji , key) in emojiItem" :key="key">
+                        <div @click="emojiClick(key,emoji)" class="elItem" v-for="(emoji , key) in emojiItem" :key="key">
                             <img class="emojiItem" :src="emoji" alt="">
                         </div>
                     </el-scrollbar>
@@ -36,13 +43,13 @@
     </div>
     <!-- 评论区 -->
     <div class="comments">
-        <div class="commentItem" v-for="item in 6" :key="item">
-            <img class="commentItem_avatar" src="https://pic.imgdb.cn/item/64f83419661c6c8e54f32ead.png">
+        <div class="commentItem" v-for="( item , index ) in commentsList" :key="index">
+            <img class="commentItem_avatar" :src="item.avatar">
             <div class="commentItem_content">
-                <div class="name">名字为八个字</div>
-                <div class="text">我是评论内容我是评论内容我是评论内容我是评论内容我是评论内容我是评论内容我是评论内容</div>
+                <div class="name">{{ item.name }}</div>
+                <div class="text">{{ item.text }}</div>
                 <div class="time">
-                    <span class="timeText">2023-09-03 12:46:37</span>
+                    <span class="timeText">{{ item.time }}</span>
                     <i class="iconfont icon-dianzan"></i>
                 </div>
             </div>
@@ -53,10 +60,15 @@
 
 <script setup lang='ts'>
 import { useUserStore } from '@/stores';
-import emojiJson from '@/assets/json/emoji.json'
+import emojiJson from '@/assets/json/emoji.json';
+import { useRouter } from 'vue-router';
+import moment from '@/utils/moment';
 
     //引入store
     const store = useUserStore()
+
+    //引入router
+    const router = useRouter()
 
     //用户信息
     let userInfo = computed(() => {
@@ -71,7 +83,73 @@ import emojiJson from '@/assets/json/emoji.json'
     //输入框内容
     let text = ref()
 
+    //是否显示弹窗
+    const showPopover = ref(false)
+
+    //表情点击
+    const emojiClick = ( key : string , value : string) => {
+        text.value = text.value + `[${key}]`
+        //关闭弹窗
+        showPopover.value = false
+    }
+
+    //评论数据类型
+    type CommentType = {
+        name : string,
+        avatar: string,
+        text : string,
+        time : string
+    }
+
+    //评论内容数组
+    let commentsList = ref<CommentType[]>([])
+
+    //发送评论
+    const setComment = () => {
+        // 如果用户登录了
+        if( userInfo.value.account !== undefined ){
+            //创建评论对象
+            let obj = {
+                name:'',
+                avatar:'',
+                text:'',
+                time:''
+            }
+            //判断是否设置了用户名
+            let haveName = userInfo.value.detail?.name !== ''
+            //是否设置了用户名
+            !haveName ? obj.name = userInfo.value.position?.ip as string : obj.name = userInfo.value.detail?.name as string
+            //存储当前用户头像
+            obj.avatar = avatar.value
+            //获取当前输入内容
+            obj.text = text.value
+            //获取当前时间
+            obj.time = moment().format('YYYY-MM-DD HH:mm:ss') 
+            //通过请求发送评论
+            commentsList.value.push(obj)
+            //清空输入框
+            text.value = ""
+            //刷新所有评论
+
+        }
+        else{
+            //未登录提示
+            ElMessage.info('您还未登录，请先登录！')
+            //跳转登录
+            router.push('/personal')
+            //弹窗
+            store.setShowLoginDialog(true)
+        }
+    }
+
+    //评论表情渲染
+    const renderingText = ( value : string ) => {
+        let reg = new RegExp(/\[(.+?)\]/g)
+        console.log(value.match(reg))
+    }
+
     onMounted(()=>{
+        renderingText('哈哈哈哈哈哈哈[tv-牛牛]，[tv-123],[[123]][')
     })
 </script>
 
@@ -102,6 +180,7 @@ import emojiJson from '@/assets/json/emoji.json'
             .avatar{
                 height: 100%;
                 object-fit: cover;
+                border-radius: 20px;
             }
             .input{
                 height: 100%;
@@ -192,6 +271,7 @@ import emojiJson from '@/assets/json/emoji.json'
                     height: 100px;
                     width: 100px;
                     object-fit: cover;
+                    border-radius: 20px;
                 }
                 .commentItem_content{
                     margin-left: 20px;

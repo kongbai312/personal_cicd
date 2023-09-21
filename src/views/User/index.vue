@@ -84,6 +84,7 @@ import { useUserStore } from '@/stores';
 import type { UserDetailInfoType } from '@/types/user';
 import { setDetailUserInfoApi } from '@/api/user_api';
 import moment from '@/utils/moment';
+import { getIp } from '@/utils/getIp';
 //头像
 import AvatarJson from '@/assets/json/avatarList.json';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
@@ -154,8 +155,16 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
         }
     }
 
-    onMounted(() => {
-        getDetailUserInfo()
+    //获取用户ip信息
+    const getUserPosition = async () => {
+        let result = await getIp()
+        //存储本地
+        store.setUserPosition(result)
+    }
+
+    onMounted( async () => {
+        await getDetailUserInfo()
+        await getUserPosition()
     })
 
     //检查本地详情信息是否和表格相同
