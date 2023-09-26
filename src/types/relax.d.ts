@@ -17,3 +17,11 @@ export type DanmuType = {
     avatar : string ,
     text : string
 }
+
+//发送评论部分
+export type SetCommentType = {
+    name: string,
+    avatar: string,
+    text: string,
+    time: string
+}

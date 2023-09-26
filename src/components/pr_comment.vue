@@ -47,7 +47,7 @@
             <img class="commentItem_avatar" :src="item.avatar">
             <div class="commentItem_content">
                 <div class="name">{{ item.name }}</div>
-                <div class="text">{{ item.text }}</div>
+                <div class="text" v-html="renderingText(item.text)"></div>
                 <div class="time">
                     <span class="timeText">{{ item.time }}</span>
                     <i class="iconfont icon-dianzan"></i>
@@ -59,13 +59,19 @@
 </template>
 
 <script setup lang='ts'>
-import { useUserStore } from '@/stores';
+import { useUserStore , useRelaxStore} from '@/stores';
 import emojiJson from '@/assets/json/emoji.json';
 import { useRouter } from 'vue-router';
 import moment from '@/utils/moment';
+import { loginApi } from '@/api/user_api';
+import { setCommentApi } from '@/api/relax_api'
+import type { SetCommentType } from '@/types/relax'
 
     //引入store
     const store = useUserStore()
+
+    //引入relaxStore
+    const relaxStore = useRelaxStore()
 
     //引入router
     const router = useRouter()
@@ -81,7 +87,7 @@ import moment from '@/utils/moment';
     })
 
     //输入框内容
-    let text = ref()
+    let text = ref('')
 
     //是否显示弹窗
     const showPopover = ref(false)
@@ -104,8 +110,46 @@ import moment from '@/utils/moment';
     //评论内容数组
     let commentsList = ref<CommentType[]>([])
 
-    //发送评论
-    const setComment = () => {
+    //发送请求获取评论token
+    const getCommentToken = async () => {
+        //发送请求获取token
+        let result : any = await loginApi({
+            account : 'osyvhps79@163.com',
+            password : 'AAA123321'
+        })
+        if(result.code === 200){//登录成功
+            //存储评论token
+            relaxStore.setCommentToken( result.result.token )
+        }
+        else{
+            ElMessage.error(result.message)
+        }
+    }
+
+    //通过请求，发送评论
+    const setCommentFn = async ( obj : SetCommentType ) => {
+        //发送评论 所需的参数
+        let commentInfoParams = [
+            obj.name,
+            obj.avatar,
+            obj.time
+        ]
+        //利用所需账号发送请求，发送评论
+        let result : any = await setCommentApi(commentInfoParams,obj.text)
+        if(result.code === 200){
+            ElMessage.success('评论成功')
+            //获取当前时间戳并存储
+            relaxStore.setCommentTime(new Date().getTime())
+            //刷新当前评论
+            
+        }
+        else{
+            ElMessage.error(result.message)
+        }
+    }
+
+    //发送评论按钮功能
+    const setComment = async () => {
         // 如果用户登录了
         if( userInfo.value.account !== undefined ){
             //创建评论对象
@@ -126,11 +170,23 @@ import moment from '@/utils/moment';
             //获取当前时间
             obj.time = moment().format('YYYY-MM-DD HH:mm:ss') 
             //通过请求发送评论
-            commentsList.value.push(obj)
+            if( relaxStore.commentToken === '' ){//如果本地没有评论用的token
+                //获取评论token并存储
+                await getCommentToken()
+            }
+            //获取当前时间戳
+            let nowTime = new Date().getTime()
+            //获取上次评论时间戳
+            let lastTime = relaxStore.commentTime
+            //如果上次评论和这次评论大于1天
+            if( nowTime - lastTime >= 24*60*60*1000 ){
+                //重新发送请求获取评论Token
+                await getCommentToken()
+            }
+            //通过请求，发送评论
+            await setCommentFn(obj)
             //清空输入框
             text.value = ""
-            //刷新所有评论
-
         }
         else{
             //未登录提示
@@ -143,13 +199,35 @@ import moment from '@/utils/moment';
     }
 
     //评论表情渲染
-    const renderingText = ( value : string ) => {
+    const renderingText = ( comment : string ) => {
+        // 获取中括号的内容
         let reg = new RegExp(/\[(.+?)\]/g)
-        console.log(value.match(reg))
+        // 根据正则提取中括号内容进入数组
+        let commentArr = comment.match(reg)
+        // 数据遍历提取对应的表情地址
+        commentArr?.forEach(( arrItem ) => {
+            // 去掉中括号,得用去除第一和最后一个字符串的方法，防止中括号嵌套全部去除掉
+            // let arrItemNo = arrItem.replace(/\[|]/g,'')
+            let arrItemNo = arrItem.slice(1,arrItem.length -1 )
+            // 拆分键值对
+            let itemArr = arrItemNo.split('-')
+            // 如果拆分的数组长度为2 才进行查询
+            if( itemArr.length === 2){
+                // 查Json是否有对应数据
+                if( (emojiJson as Record<string, Record<string,string>>)[itemArr[0]][arrItemNo] !== undefined ){
+                    //存在则说明在表情库里，则进行替换
+                    let imgText = `<img class="imgEmojiItem" src="${(emojiJson as Record<string, Record<string,string>>)[itemArr[0]][arrItemNo]}" />`
+                    comment = comment.replace(arrItem , imgText) 
+                
+                }
+            }
+        })
+        
+        return comment
     }
 
     onMounted(()=>{
-        renderingText('哈哈哈哈哈哈哈[tv-牛牛]，[tv-123],[[123]][')
+        renderingText('哈哈哈哈哈哈哈[TV-牛牛]，[TV-坏笑],[[123]][')
     })
 </script>
 
@@ -282,6 +360,14 @@ import moment from '@/utils/moment';
                     .text{
                         font-size: 20px;
                         margin: 20px 0;
+                        ::v-deep(){
+                            .imgEmojiItem{
+                                width: 60px;
+                                height: 60px;
+                                object-fit: cover;
+                            }
+                        }
+                        
                     }
                     .time{
                         .timeText{
@@ -399,6 +485,22 @@ import moment from '@/utils/moment';
                     }
                 }
             }
+            // 评论区
+            .comments{
+                .commentItem{
+                    .commentItem_content{
+                        .text{
+                            ::v-deep(){
+                                .imgEmojiItem{
+                                    width: 40px;
+                                    height: 40px;
+                                    object-fit: cover;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -510,6 +612,13 @@ import moment from '@/utils/moment';
                         .text{
                             margin: 10px 0;
                             font-size: 14px;
+                            ::v-deep(){
+                                .imgEmojiItem{
+                                    width: 40px;
+                                    height: 40px;
+                                    object-fit: cover;
+                                }
+                            }
                         }
                         .time{
                             .timeText{

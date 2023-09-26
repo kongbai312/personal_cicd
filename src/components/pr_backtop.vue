@@ -9,6 +9,13 @@
             <button class="backTop_icon" @click="goTop" title="回到顶部">
                 <i class="iconfont icon-xiangshangjiantou"></i>
             </button>
+            <transition name="scrollTransition">
+                <template v-if="isSetShow">
+                    <button class="backTop_icon" @click="hidden" title="隐藏">
+                        <i class="iconfont icon-zhankai"></i>
+                    </button>
+                </template>
+            </transition>
         </div>
     </transition>
 </template>
@@ -16,6 +23,9 @@
 <script setup lang='ts'>
     //控制组件显示隐藏
     let isShow = ref(true)
+
+    //是否点击了设置
+    let isSetShow = ref(false)
 
     //给滚动条添加监听
     let addScroll = () => {
@@ -46,7 +56,13 @@
 
     //设置功能
     const set = () => {
-        ElMessage.info('设置功能还在开发哦(｡･∀･)ﾉﾞ')
+        // ElMessage.info('设置功能还在开发哦(｡･∀･)ﾉﾞ')
+        isSetShow.value = !isSetShow.value
+    }
+
+    // 隐藏功能
+    const hidden = () => {
+        isShow.value = false
     }
 </script>
 
@@ -54,7 +70,7 @@
 // 过渡
 .scrollTransition-enter-from, 
 .scrollTransition-leave-to{
-    transform: translate(54px,0);
+    transform: translate(150px,0);
 }
 .scrollTransition-enter-active,
 .scrollTransition-leave-active{
@@ -64,6 +80,7 @@
 .scrollTransition-leave-from{
     transform: translate(0,0);
 }
+
 //动画
 @keyframes iconRotate {
     to{
@@ -79,6 +96,7 @@
         bottom: 5%;
         display: flex;
         flex-direction: column;
+        z-index: 99;
         .backTop_icon{
             display: flex;
             justify-content: center;

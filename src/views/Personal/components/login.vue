@@ -176,7 +176,7 @@ import { useRouter } from 'vue-router';
                     //发送请求注册
                     result = await registerApi( loginForm )
                 }
-                if(result.code === 200){//注册成功
+                if(result.code === 200){//登录注册成功
                     //存储用户信息
                     store.setUserInfo( result.result )
                     //注册成功提示
