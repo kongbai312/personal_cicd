@@ -20,13 +20,9 @@ let urlList = [
     'https://api.github.com'
 ]
 
-//需要带其他token的请求头
-let urlOtherList = [
-    'https://api.apiopen.top/api/publishDynamic'
-]
-
-//是否需要query参数的其他url
-let needQueryUrlList = [
+//需要带评论token的请求头
+let needCommentTokenList = [
+    'https://api.apiopen.top/api/publishDynamic',
     'https://api.apiopen.top/api/getPersonDynamicList'
 ]
 
@@ -34,19 +30,25 @@ let needQueryUrlList = [
 request.interceptors.request.use(
     config => {
         let token = store.userInfo?.token
-        //判断是否在不需要token请求头的url数组
+        //筛选出不带params和query的Url地址
         let urlArr = config.url!.split('/')
-        let index = urlList.findIndex(( item ) => item === `${urlArr[0]}//${urlArr[2]}`)
+        //判断是否在不需要token请求头的url数组
+        let needToken = urlList.findIndex(( item ) => item === `${urlArr[0]}//${urlArr[2]}`) === -1
+        //筛选出不带query的url
+        urlArr = config.url!.split('?')
+        // 网站不带query的url
+        let noHaveQueryUrl = urlArr[0]
+        // 判断是否需要带评论token
+        let needCommentToken = (needCommentTokenList.findIndex((item) => item === noHaveQueryUrl)) !== -1
         //判断是否添加token请求头
-        if( token !== undefined && token !== "" && index === -1){
-            //判断是否添加其他token
-            let needQueryUrlArr = config.url!.split('?')
-            let isNeedQueryUrl : boolean
-            // 小于2 说明没有query
-            needQueryUrlArr.length >=2 ? (isNeedQueryUrl = (needQueryUrlList.findIndex(( item ) => item === needQueryUrlArr[0]) !== -1)) : (isNeedQueryUrl = false)
-            //需要其他token
-            let isOtherToken = (urlOtherList.findIndex(( item ) => item === config.url) !== -1)
-            config.headers.token = (isOtherToken || isNeedQueryUrl) ? relaxStore.commentToken : token
+        if( token !== undefined && token !== "" && needToken){
+            //用户token
+            config.headers.token = token
+        }
+        //判断是否需要评论token
+        else if( needCommentToken ){
+            //评论token
+            config.headers.token = relaxStore.commentToken
         }
         return config
     },

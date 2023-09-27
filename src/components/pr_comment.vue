@@ -20,8 +20,8 @@
     <!-- 表情 -->
     <div class="emoji">
         <el-popover 
-            width="300px" 
-            placement="bottom" 
+             
+            placement="right" 
             trigger="click" 
             popper-class="emojiPopover" 
             :teleported="false"
@@ -64,8 +64,8 @@ import emojiJson from '@/assets/json/emoji.json';
 import { useRouter } from 'vue-router';
 import moment from '@/utils/moment';
 import { loginApi } from '@/api/user_api';
-import { setCommentApi } from '@/api/relax_api'
-import type { SetCommentType } from '@/types/relax'
+import { setCommentApi , getCommentsApi } from '@/api/relax_api';
+import type { CommentType } from '@/types/relax';
 
     //引入store
     const store = useUserStore()
@@ -99,14 +99,6 @@ import type { SetCommentType } from '@/types/relax'
         showPopover.value = false
     }
 
-    //评论数据类型
-    type CommentType = {
-        name : string,
-        avatar: string,
-        text : string,
-        time : string
-    }
-
     //评论内容数组
     let commentsList = ref<CommentType[]>([])
 
@@ -126,8 +118,32 @@ import type { SetCommentType } from '@/types/relax'
         }
     }
 
+    //获取所有评论
+    const getComments = async ( page : number , size : number) => {
+        // 判断是否有评论token
+        if( relaxStore.commentToken === '' ){//如果本地没有评论用的token
+            //获取评论token并存储
+            await getCommentToken()
+        }
+        let result : any = await getCommentsApi({page,size})
+        if(result.code === 200){
+            commentsList.value = result.result.list.map( (commentItem : any) => {
+                return {
+                    id : commentItem.id ,
+                    name : commentItem.images[0].url,
+                    avatar : commentItem.images[1].url,
+                    time : commentItem.images[2].url,
+                    text : commentItem.text
+                } 
+            })
+        }
+        else{
+            ElMessage.error('评论加载失败，' + result.message)
+        }
+    }
+
     //通过请求，发送评论
-    const setCommentFn = async ( obj : SetCommentType ) => {
+    const setCommentFn = async ( obj : CommentType ) => {
         //发送评论 所需的参数
         let commentInfoParams = [
             obj.name,
@@ -141,7 +157,7 @@ import type { SetCommentType } from '@/types/relax'
             //获取当前时间戳并存储
             relaxStore.setCommentTime(new Date().getTime())
             //刷新当前评论
-            
+            await getComments(1,20)
         }
         else{
             ElMessage.error(result.message)
@@ -218,16 +234,15 @@ import type { SetCommentType } from '@/types/relax'
                     //存在则说明在表情库里，则进行替换
                     let imgText = `<img class="imgEmojiItem" src="${(emojiJson as Record<string, Record<string,string>>)[itemArr[0]][arrItemNo]}" />`
                     comment = comment.replace(arrItem , imgText) 
-                
                 }
             }
         })
-        
         return comment
     }
 
     onMounted(()=>{
-        renderingText('哈哈哈哈哈哈哈[TV-牛牛]，[TV-坏笑],[[123]][')
+        //获取所有评论
+        getComments(1,20)
     })
 </script>
 
@@ -293,6 +308,7 @@ import type { SetCommentType } from '@/types/relax'
             ::v-deep(){
                 // 表情弹层
                 .emojiPopover{
+                    width: 600px !important;
                     padding: 0;
                     .elTabs{
                         border: none;
@@ -301,17 +317,18 @@ import type { SetCommentType } from '@/types/relax'
                         }
                         //滚动条
                         .elTab{
-                            height: 200px;
+                            height: 300px;
                             .el-scrollbar__wrap{
                                 .el-scrollbar__view{
                                     padding: 15px;
                                     display: grid;
-                                    grid-template-columns: repeat(auto-fill, minmax( 50px , 1fr ));
+                                    grid-template-columns: repeat(auto-fill, minmax( 80px , 1fr ));
                                     grid-gap: 10px 20px;
-                                    grid-template-rows: repeat(auto-fill , 50px);
+                                    grid-template-rows: repeat(auto-fill , 80px);
+                                    justify-items: center;
                                     .elItem{
-                                        width: 50px;
-                                        height: 50px;
+                                        width: 80px;
+                                        height: 80px;
                                         cursor: url(../assets/cursor/link.cur),pointer;
                                         &:hover{
                                             background-color: #e3e5e7;
@@ -425,15 +442,15 @@ import type { SetCommentType } from '@/types/relax'
                 margin-left: 60px;
                 ::v-deep(){
                     .emojiPopover{
-                        left: 15px !important;
+                        width: 400px !important;
                         // 箭头
                         .el-popper__arrow{
-                            width: 8px;
-                            height: 8px;
-                            top: -4px;
+                            width: 10px;
+                            height: 10px;
+                            left: -6px;
                             &::before{
-                                width: 8px;
-                                height: 8px;
+                                width: 10px;
+                                height: 10px;
                             }
                         }
                         .elTabs{
@@ -535,15 +552,15 @@ import type { SetCommentType } from '@/types/relax'
                 }
                 ::v-deep(){
                     .emojiPopover{
-                        left: 10px !important;
+                        width: 250px !important;
                         // 箭头
                         .el-popper__arrow{
-                            width: 8px;
-                            height: 8px;
-                            top: -4px;
+                            width: 10px;
+                            height: 10px;
+                            left: -6px;
                             &::before{
-                                width: 8px;
-                                height: 8px;
+                                width: 10px;
+                                height: 10px;
                             }
                         }
                         .elTabs{

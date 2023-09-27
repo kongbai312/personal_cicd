@@ -19,7 +19,8 @@ export type DanmuType = {
 }
 
 //发送评论部分
-export type SetCommentType = {
+export type CommentType = {
+    id? : number,
     name: string,
     avatar: string,
     text: string,
