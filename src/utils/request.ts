@@ -41,7 +41,7 @@ request.interceptors.request.use(
         // 判断是否需要带评论token
         let needCommentToken = (needCommentTokenList.findIndex((item) => item === noHaveQueryUrl)) !== -1
         //判断是否添加token请求头
-        if( token !== undefined && token !== "" && needToken){
+        if( token !== undefined && token !== "" && needToken && !needCommentToken){
             //用户token
             config.headers.token = token
         }

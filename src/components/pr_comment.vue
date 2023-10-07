@@ -139,6 +139,10 @@ import type { CommentType } from '@/types/relax';
         }
         else{
             ElMessage.error('评论加载失败，' + result.message)
+            //清空本地评论token
+            relaxStore.setCommentToken( '' )
+            //提示手动刷新页面
+            ElMessage.info('即将获取最新的令牌，请手动刷新页面')
         }
     }
 
