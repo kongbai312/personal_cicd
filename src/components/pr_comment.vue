@@ -54,7 +54,17 @@
                 </div>
             </div>
         </div>
+        
     </div>
+    <!-- 分页 -->
+    <el-pagination 
+        class="pr_pagination" 
+        background layout="prev, pager, next" 
+        :page-size="pageInfo.pageCount" 
+        :total="pageInfo.total"
+        v-model:current-page="pageInfo.currentPage"
+        @update:current-page="getComments(pageInfo.currentPage,pageInfo.pageCount)"
+    />
   </div>
 </template>
 
@@ -118,6 +128,14 @@ import type { CommentType } from '@/types/relax';
         }
     }
 
+    //页码相关
+    let pageInfo = ref({
+        totalPage: 0,       //总页数
+        currentPage: 1,     //当前页码
+        total: 0,           //总数量
+        pageCount: 10       //每页多少个
+    })
+
     //获取所有评论
     const getComments = async ( page : number , size : number) => {
         // 判断是否有评论token
@@ -136,6 +154,10 @@ import type { CommentType } from '@/types/relax';
                     text : commentItem.text
                 } 
             })
+            //存储总数量
+            pageInfo.value.total = result.result.total
+            //存储总页码
+            pageInfo.value.totalPage = Math.ceil(result.result.total / pageInfo.value.pageCount)
         }
         else{
             ElMessage.error('评论加载失败，' + result.message)
@@ -160,8 +182,12 @@ import type { CommentType } from '@/types/relax';
             ElMessage.success('评论成功')
             //获取当前时间戳并存储
             relaxStore.setCommentTime(new Date().getTime())
+            //计算出最新评论在第几页
+            let page = Math.ceil( (pageInfo.value.total + 1) / pageInfo.value.pageCount)
             //刷新当前评论
-            await getComments(1,20)
+            await getComments(page,pageInfo.value.pageCount)
+            //更改当前页码
+            pageInfo.value.currentPage = page
         }
         else{
             ElMessage.error(result.message)
@@ -246,7 +272,7 @@ import type { CommentType } from '@/types/relax';
 
     onMounted(()=>{
         //获取所有评论
-        getComments(1,20)
+        getComments(pageInfo.value.currentPage,pageInfo.value.pageCount)
     })
 </script>
 
@@ -402,6 +428,46 @@ import type { CommentType } from '@/types/relax';
                 }
             }
         }
+        //分页
+        .pr_pagination{
+            ::v-deep(){
+                // 前一页
+                .btn-prev{
+                    border-radius: 6px;
+                    height: 40px;
+                    width: 40px;
+                    .el-icon{
+                        font-size: 18px;
+                    }
+                }
+                .el-pager{
+                    li{
+                        height: 40px;
+                        line-height: 40px;
+                        width: 40px;
+                        border-radius: 6px;
+                        font-size: 18px;
+                        svg{
+                            font-size: 18px;
+                        }
+                    }
+                    //当前激活样式
+                    .is-active{
+                        background-color: var(--sw-pagination-bg-color-active);
+                    }
+                }
+                //下一页
+                .btn-next{
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 6px;
+                    .el-icon{
+                        font-size: 18px;
+                    }
+                }
+            }
+            
+        }
     }
 
     @media (min-width: 600px) {
@@ -518,6 +584,42 @@ import type { CommentType } from '@/types/relax';
                                     object-fit: cover;
                                 }
                             }
+                        }
+                    }
+                }
+            }
+            //分页
+            .pr_pagination{
+                ::v-deep(){
+                    // 前一页
+                    .btn-prev{
+                        border-radius: 4px;
+                        height: 20px;
+                        width: 20px;
+                        .el-icon{
+                            font-size: 14px;
+                        }
+                    }
+                    .el-pager{
+                        li{
+                            height: 20px;
+                            width: 20px;
+                            line-height: 20px;
+                            border-radius: 4px;
+                            font-size: 14px;
+                            margin: 0 3px;
+                            svg{
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                    //下一页
+                    .btn-next{
+                        height: 20px;
+                        width: 20px;
+                        border-radius: 4px;
+                        .el-icon{
+                            font-size: 14px;
                         }
                     }
                 }
@@ -648,6 +750,42 @@ import type { CommentType } from '@/types/relax';
                             .iconfont{
                                 font-size: 10px;
                             }
+                        }
+                    }
+                }
+            }
+            //分页
+            .pr_pagination{
+                ::v-deep(){
+                    // 前一页
+                    .btn-prev{
+                        border-radius: 4px;
+                        height: 20px;
+                        width: 20px;
+                        .el-icon{
+                            font-size: 14px;
+                        }
+                    }
+                    .el-pager{
+                        li{
+                            height: 20px;
+                            width: 20px;
+                            line-height: 20px;
+                            border-radius: 4px;
+                            font-size: 14px;
+                            margin: 0 3px;
+                            svg{
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                    //下一页
+                    .btn-next{
+                        height: 20px;
+                        width: 20px;
+                        border-radius: 4px;
+                        .el-icon{
+                            font-size: 14px;
                         }
                     }
                 }
