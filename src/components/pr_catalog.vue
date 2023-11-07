@@ -30,6 +30,8 @@
         padding: 10px;
         background: var(--sw-footer-bg-color);
         background-size: 400% 400%;
+        border: var(--article-btn-border);
+        border-left: none;
         animation: bgAnimation 10s ease infinite;
         user-select: none;
         &:hover{

@@ -7,7 +7,7 @@
         <div class="home_circle"></div>
         <div class="home_circle_img"></div>
       </div>
-      <span class="home_navbar_item navbar_item_right">OTHER</span>
+      <span class="home_navbar_item navbar_item_right" @click="downResume">RESUME</span>
     </div>
     <div class="home_live2d">
       <canvas id="live2dcanvas" width="600" height="600"></canvas>
@@ -20,6 +20,8 @@ import { onMounted } from 'vue';
 import { L2Dwidget } from 'live2d-widget'; 
 import { useRouter } from 'vue-router';
 import { useUsuallyStore } from '@/stores';
+import { useWindowSize } from '@vueuse/core';
+import ResumePdf from '@/assets/resume/朱博艺前端开发工程师.pdf';
 
 //引入router
 const router = useRouter()
@@ -89,10 +91,45 @@ const homeLoad = () => {
     store.setIsFirstHome(true)
   }
 }
+
 onMounted(() => {
   homeLoad()
   live2dInit()
 })
+
+  //获取实例对象
+  const { proxy } = getCurrentInstance() as any
+
+  //简历下载
+  const downResume = async() => {
+    // try {
+    //   await ElMessageBox.confirm(
+    //     '即将跳转并下载作者的简历',
+    //     '提示',
+    //     {
+    //       confirmButtonText: '确认',
+    //       cancelButtonText: '取消',
+    //       type: 'warning',
+    //       center: true,
+    //     }
+    //   )
+    // } catch (error) {
+    //   ElMessage.info('取消操作')
+    // }
+    proxy.$message.warn('即将跳转并下载作者的简历')
+    //文件名
+    let fileName = '朱博艺前端开发工程师.pdf'
+    const link = document.createElement('a');
+    link.href = ResumePdf
+    link.setAttribute('download', fileName);
+    link.click();
+    // 窗口长宽
+    const { width } = useWindowSize()
+    if( width.value > 600){
+      //打开简历
+      window.open(ResumePdf)
+    }
+  }
 
 </script>
 
@@ -189,6 +226,12 @@ onMounted(() => {
     }
   }
 
+  ::v-deep(){
+    //弹窗
+    .el-message-box{
+      width: 50vw !important;
+    }
+  }
   @media (max-width: 992px) {
     .home_container{
       .home_title{

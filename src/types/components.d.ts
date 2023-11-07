@@ -10,6 +10,7 @@ import PrPagination from '@/components/pr_pagination.vue';
 import PrHeaderImg from '@/components/pr_headerImg.vue';
 import PrComment from '@/components/pr_comment.vue';
 import PrLine from '@/components/pr_line.vue';
+import PrMessage from '@/components/pr_message.vue'
 // 2. 声明 vue 类型模块
 declare module 'vue' {
     // 3. 给 vue  添加全局组件类型，interface 和之前的合并
@@ -26,5 +27,6 @@ declare module 'vue' {
         PrHeaderImg: typeof PrHeaderImg;
         PrComment : typeof PrComment;
         PrLine : typeof PrLine;
+        PrMessage : typeof PrMessage;
     }
 }

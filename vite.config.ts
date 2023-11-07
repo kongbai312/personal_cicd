@@ -17,6 +17,7 @@ export default ( { mode }) => {
   return defineConfig({
     plugins: [
       vue({
+        //defineProps使用默认值
         reactivityTransform: true
       }),
       AutoImport({

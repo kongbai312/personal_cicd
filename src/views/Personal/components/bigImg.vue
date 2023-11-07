@@ -13,7 +13,7 @@ import type { TypedOptions } from "@duskmoon/vue3-typed-js";
 
   //配置打字机配置
   const options: typeof TypedOptions = {
-      strings: ["您好！", "欢迎来到 Swhite 的小窝", "Hello","Welcome to Swhite's Nest"],
+      strings: ["您好！", "欢迎来到 Swhite 的博客", "Hello","Welcome to Swhite's Blog"],
       // 是否循环
       loop: true,
       // 打字速度

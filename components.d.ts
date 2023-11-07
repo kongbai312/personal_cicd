@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    ElButton: typeof import('element-plus/es')['ElButton']
     ElCalendar: typeof import('element-plus/es')['ElCalendar']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
@@ -48,6 +47,7 @@ declare module 'vue' {
     Pr_line: typeof import('./src/components/pr_line.vue')['default']
     Pr_littleMenu: typeof import('./src/components/pr_littleMenu.vue')['default']
     Pr_menu: typeof import('./src/components/pr_menu.vue')['default']
+    Pr_message: typeof import('./src/components/pr_message.vue')['default']
     Pr_narbar: typeof import('./src/components/pr_narbar.vue')['default']
     Pr_pagination: typeof import('./src/components/pr_pagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

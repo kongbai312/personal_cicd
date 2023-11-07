@@ -6,10 +6,81 @@
   <div class="a-text">5</div>
   <div class="a-img3">6</div>
   <div class="a-text">7</div>
+  <!-- <select v-model="selectValue.first">
+    <option v-for="item in data" :value="item.id" :label="item.name"></option>
+  </select>
+  <select v-model="selectValue.second">
+    <option v-for="item in data2" :value="item.id" :label="item.name"></option>
+  </select>
+  <button @click="selectClick">显示</button> -->
 </template>
 
 <script setup lang="ts">
 import imgBase64 from '@/assets/json/imgBase64.json';
+
+  // let data = [
+  //   {
+  //     id:1,
+  //     name:"值1",
+  //     children:[
+  //       {
+  //         id:11,
+  //         name:"值11",
+  //         children:[
+  //           {
+  //             id:111,
+  //             name:"值111",
+  //           },
+  //           {
+  //             id:112,
+  //             name:"值112",
+  //           }
+  //         ]
+  //       },
+  //       {
+  //         id:12,
+  //         name:"值12",
+  //         children:[
+  //           {
+  //             id:121,
+  //             name:"值121",
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     id:2,
+  //     name:"值2",
+  //     children:[
+  //       {
+  //         id:22,
+  //         name:"值22",
+  //         children:[
+  //           {
+  //             id:222,
+  //             name:"值222",
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // ]
+
+  // let data2 = computed(() => {
+  //   console.log(data.find( item => item.id === selectValue.value.first))
+  //   return data.find( item => item.id === selectValue.value.first)?.children
+  // })
+
+  // let selectValue = ref({
+  //   "first":null,
+  //   "second":null,
+  //   "third":null
+  // })
+
+  // const selectClick = () => {
+  //   console.log(selectValue.value)
+  // }
 
   //设置打印的输入样式
   const setConsole = () => {

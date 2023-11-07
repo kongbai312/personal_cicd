@@ -26,11 +26,15 @@ import echarts from '@/utils/echarts';
 //引入热日历
 import VueCalendarHeatmap from 'vue3-calendar-heatmap'; 
 
+//导入自己封装的组件库
+import PrUI from '@/components/library/index';
+
 const app = createApp(App)
 
 app.provide('$echarts', echarts);
 app.use(pinia)
 app.use(router)
 app.use(VueCalendarHeatmap)
+app.use(PrUI)
 
 app.mount('#app')

@@ -32,9 +32,11 @@ html.dark {
     //关于部分名字颜色
     --sw-about-name-color:#111;
     //文章目录背景颜色
-    --sw-article-catalog-bg-color: #202020;
+    --sw-article-catalog-bg-color: #000;
     //文章目录边框颜色
     --article-catalog-border-color: #2f2f2f;
+    //文章目录按钮边框
+    --article-btn-border:1px solid #999;
     //文章内容背景颜色
     --article-content-bg-color: #1E1E1E;
     //文章归档小圆点边框颜色
