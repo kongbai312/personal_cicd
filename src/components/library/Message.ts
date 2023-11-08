@@ -11,7 +11,7 @@ import PrMessage from '../pr_message.vue';
 
 //从Vue中引入:    createVNode('标签名/组件', { 属性 })
 //创建了一个虚拟节点
-const divVNode = createVNode('div',{class:'xtx-message-container'})
+const divVNode = createVNode('div',{class:'pr-message-container'})
 // 把虚拟 DOM 渲染到 body 中
 // render(虚拟节点,DOM容器)
 render(divVNode,document.body)

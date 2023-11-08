@@ -195,7 +195,6 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
                     userDetailInfo.value.updatedAt = time
                     //发送请求
                     let result = await setDetailUserInfoApi(userDetailInfo.value)
-                    console.log(result)
                     //提示
                     result.code === 200 ? ElMessage.success('保存成功') : ElMessage.error(result.message)
                     //存储到本地
