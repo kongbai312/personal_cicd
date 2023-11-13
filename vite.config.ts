@@ -52,7 +52,15 @@ export default ( { mode }) => {
     //服务器端口
     server: {
       port: 8080,
-      open: true
+      open: true,
+      // proxy:{
+      //   '/api/':{
+      //     target:'http://geek.itheima.net',
+      //     changeOrigin: true,
+      //     //去除api
+      //     rewrite: ( path ) => path.replace(/^\/api/, '')
+      //   }
+      // }
     },
     //github部署
     base: env.MODE === 'production' ? '/personaltsup/' : './',

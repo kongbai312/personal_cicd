@@ -138,9 +138,17 @@ const routes = [
     //测试页面
     {
         path:'/test',
-        component: () => import('@/views/test.vue'),
+        component: () => import('@/views/TestCom/test.vue'),
         meta:{
             title:'测试页面'
+        }
+    },
+    //上传页面
+    {
+        path:'/load',
+        component: () => import('@/views/TestCom/load.vue'),
+        meta:{
+            title:'上传页面'
         }
     },
     // 错误页面
