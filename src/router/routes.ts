@@ -151,6 +151,14 @@ const routes = [
             title:'上传页面'
         }
     },
+    //原生上传页面
+    {
+        path:'/loadnative',
+        component: () => import('@/views/TestCom/loadNative.vue'),
+        meta:{
+            title:'原生上传页面'
+        }
+    },
     // 错误页面
     {
         path:'/404',

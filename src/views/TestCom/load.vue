@@ -36,7 +36,7 @@
             <template v-if="loadMethod === 'excelLoad'">
                 <el-icon class="el-icon--upload"><upload-filled /></el-icon>
                 <div class="el-upload__text">
-                将文件拖动到区域<em>点击区域上传</em>
+                    将文件拖动到区域<em>点击区域上传</em>
                 </div>
             </template>
             <template #tip>
@@ -52,10 +52,35 @@
 
 <script setup lang='ts'>
 import { UploadFilled, Plus } from '@element-plus/icons-vue';
-import { uploadImgApi } from '@/api/test_api';
+import { uploadImgApi, getUploadImgTokenApi } from '@/api/test_api';
+import { useTestStore } from '@/stores/modules/test';
 import useClipboard from 'vue-clipboard3';
 // @ts-ignore
 import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
+
+
+    //引入store
+    const testStore = useTestStore()
+
+    //获取上传图片所需token
+    const getUploadImgToken = async() => {
+        //并设置获取时间 获取当前时间戳
+        let nowTime = new Date().getTime()
+        //获取上次登录时间戳
+        let lastTime = testStore.lastUploadImgTime
+        //如果大于2小时
+        if(nowTime - lastTime > 2*60*60*1000){
+            //则发送请求获取token
+            let result = await getUploadImgTokenApi()
+            //存储token
+            testStore.setUploadImgToken(result.data.token)
+            //存储当前时间戳
+            testStore.setLastUploadImgTime(new Date().getTime())
+        }   
+    }
+    onMounted(() => {
+        getUploadImgToken()
+    })
 
     //上传方式
     let loadMethod = ref('imgLoad')
@@ -103,7 +128,7 @@ import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
     })
     
     // 上传前的函数
-    const beforeAvatarUpload: UploadProps['beforeUpload'] = ( rawFile : UploadRawFile) => {
+    const beforeAvatarUpload: UploadProps['beforeUpload'] = ( rawFile : UploadRawFile ) => {
         //图片上传
         if(loadMethod.value === "imgLoad"){
             if (rawFile.type !== 'image/jpeg' && rawFile.type !== 'image/png' ) {
