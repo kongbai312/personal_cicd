@@ -12,7 +12,14 @@
     </div>
     <!-- 数据渲染区 -->
     <button class="exportBtn" @click="exportBtnClick">导出Excel</button>
-    <el-table border :data="tableData" stripe style="width: 80%;margin-top: 30px;">
+    <el-table 
+        border 
+        :data="tableData" 
+        stripe 
+        class="elTableStyle"
+        row-class-name="rowClass"
+        header-row-class-name="headerRowClass"
+    >
         <el-table-column v-for="header in tableHeadersList" :prop="header" :label="header" />
     </el-table>
   </div>
@@ -201,9 +208,49 @@ import * as XLSX from 'xlsx';
 
     //导出excel
     const exportBtnClick = () => {
-
+        //用来存储导出的数据
+        let dataArr = [[...tableHeadersList.value]]
+        //处理成2维数组
+        let arrs = tableData.value.map( (item : any) => {
+            //存储修改后的数据
+            let arr = []
+            //set数组遍历
+            for(let value of tableHeadersList.value.values()){
+                arr.push(item[value as string])
+            }
+            return arr
+        })
+        //与表头合并
+        dataArr.push(...arrs)
+        
+        //excel导出
+        // 创建一个空的Workbook对象
+        const wb = XLSX.utils.book_new();
+        // 创建一个新的Worksheet
+        const ws = XLSX.utils.aoa_to_sheet(dataArr);
+        // 将Worksheet添加到Workbook中
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        // 生成Excel文件的Binary字符串
+        const excelBinaryString = XLSX.write(wb, { type: 'binary' });
+        // 将Binary字符串转换为Blob对象
+        const blob = new Blob([s2ab(excelBinaryString)], { type: 'application/octet-stream' });
+        // 导出Excel文件名
+        const fileName = 'example.xlsx';
+        
+        //文件下载
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+        URL.revokeObjectURL(link.href);
     }
-
+    // 将s字符串转换为Uint8Array
+    function s2ab(s : any) {
+        const buf = new ArrayBuffer(s.length);
+        const view = new Uint8Array(buf);
+        for (let i = 0; i !== s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+        return buf;
+    }
 </script>
 
 <style lang="scss" scoped>
@@ -254,6 +301,62 @@ import * as XLSX from 'xlsx';
                 background-color: #79bbff;
             }
         }
+        .elTableStyle{
+            width: 80%;
+            margin-top: 20px;
+        }
     }
     
+
+    @media (min-width: 600px) {
+        .loadNative_container{
+            .drop_container{
+                min-height: 150px;
+                min-width: 400px;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        .loadNative_container{
+            .drop_container{
+                flex-direction: column;
+                width: 300px;
+                .uploadBtn{
+                    margin:0;
+                    margin-top: 10px;
+                    padding: 7px 10px;
+                    border-radius: 5px;
+                }
+            }
+            // 导出按钮
+            .exportBtn{
+                margin-top: 10px;
+                padding: 7px 10px;
+                border-radius: 5px;
+            }
+            .elTableStyle{
+                width: 90%;
+                margin-top: 20px;
+            }
+            ::v-deep(){
+                .rowClass{
+                    height: 30px;
+                    font-size: 8px;
+                    .cell{
+                        height: 100%;
+                        line-height: 100%;
+                    }
+                }
+                .headerRowClass{
+                    height: 30px;
+                    font-size: 8px;
+                    .cell{
+                        height: 100%;
+                        line-height: 100%;
+                    }
+                }
+            }
+        }
+    }
 </style>

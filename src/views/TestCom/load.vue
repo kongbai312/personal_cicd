@@ -2,12 +2,19 @@
   <div class="load_container">
     <!-- 按钮区 -->
     <div class="load_btnBox">
-        <el-select class="load_select" placeholder="上传方式" v-model="loadMethod" size="large">
+        <el-select 
+            class="load_select" 
+            placeholder="上传方式" 
+            v-model="loadMethod"
+            size="large" 
+            @change="selectChange"
+        >
             <el-option
                 v-for="item in SelectOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
+                style="min-height: 30px;display:flex;align-items: center;font-size: 14px;"
             />
         </el-select>
         <div class="btn_load" @click="clickUpload">上传</div>
@@ -20,6 +27,7 @@
             :class="fileSizeInfo.class"
             drag
             multiple
+            v-model:file-list="fileList"
             list-type="picture"
             :before-upload="beforeAvatarUpload"
             :on-success="handleAvatarSuccess"
@@ -57,6 +65,7 @@ import { useTestStore } from '@/stores/modules/test';
 import useClipboard from 'vue-clipboard3';
 // @ts-ignore
 import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
+import { useRouter } from 'vue-router';
 
 
     //引入store
@@ -85,8 +94,17 @@ import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
     //上传方式
     let loadMethod = ref('imgLoad')
 
+    //上传方式发生改变
+    const selectChange = () => {
+        //清空上传列表
+        fileList.value = []
+    }
+
     //上传的文件数据
     let loadData = ref()
+
+    //上传的文件列表
+    let fileList = ref([])
 
     //上传组件ref
     let elUploadRef = ref()
@@ -117,7 +135,7 @@ import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
         }
         else if(loadMethod.value === 'excelLoad'){
             return {
-                text:"excel文件大小小于 2MB",
+                text:"excel文件大小小于 2MB，暂时没完成该功能，会跳转至原生写法",
                 class:"file_uploader",
                 listType : 'text'
             }
@@ -144,6 +162,9 @@ import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
             loadData.value.append('photo',rawFile)
             return true
         }
+        else if(loadMethod.value === "excelLoad"){//excel文件上传
+
+        }
     }
 
     //上传文件到服务器
@@ -158,17 +179,31 @@ import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
 
     //上传成功的函数
     const handleAvatarSuccess: UploadProps['onSuccess'] = (response :any,uploadFile : UploadFile) =>{
-        //返回图片地址在response.data.photo
-        // imageUrl.value = URL.createObjectURL(uploadFile.raw!)
-        imageUrl.value.push({
-            uid:uploadFile.uid,
-            url:response.data.photo
-        })
-        ElMessage.success('上传成功')
+        //图片上传成功
+        if(loadMethod.value === "imgLoad"){
+            //返回图片地址在response.data.photo
+            // imageUrl.value = URL.createObjectURL(uploadFile.raw!)
+            //上传成功后，保存图片url地址
+            imageUrl.value.push({
+                uid:uploadFile.uid,
+                url:response.data.photo
+            })
+            ElMessage.success('上传成功')
+        }
+        else if(loadMethod.value === "excelLoad"){//excel文件上传成功
+
+        }
     }
 
+    //引入router
+    const router = useRouter()
     //点击上传
     const clickUpload = () => {
+        //临时写一个跳转路由的，以后不用删掉
+        if(loadMethod.value === 'excelLoad'){
+            router.push('/loadnative')
+            return
+        }
         //调用组件方法
         elUploadRef.value!.submit()
     }
@@ -212,12 +247,11 @@ import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
             justify-content: space-around;
             align-items: center;
             .btn_load{
-                padding: 20px 30px;
+                padding: 15px 20px;
                 border-radius: 10px;
                 background-color: #409EFF;
                 color: #fff;
                 cursor: pointer;
-                font-size: 18px;
                 &:hover{
                     background-color: #79bbff;
                 }
@@ -252,6 +286,96 @@ import type { UploadProps,UploadRawFile,UploadFile } from 'element-plus';
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        .load_container{
+            .load_btnBox{
+                height: 60px;
+                width: 300px;
+                .btn_load{
+                    box-sizing: border-box;
+                    height: 40px;
+                    display: flex;
+                    padding: 0 10px;
+                    align-items: center;
+                    border-radius: 5px;
+                }
+                .load_select{
+                    height: 40px;
+                    ::v-deep(){
+                        .select-trigger{
+                            height: 100%;
+                            border-radius: 5px;
+                            .el-input{
+                                height: 100%;
+                                .el-input__wrapper{
+                                    border-radius: 5px;
+                                    height:100%;
+                                    .el-input__inner{
+                                        font-size: 16px;
+                                        height:100%;
+                                    }
+                                    .el-input__suffix{
+                                        .el-select__icon{
+                                            font-size: 18px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .popperClass{
+                            height: 300px;
+                        }
+                    }
+                }
+            }
+            //上传区
+            .loadBox{
+                .avatar_uploader{
+                    margin-top: 50px;
+                    height:200px;
+                    width: 200px;
+                    ::v-deep(){
+                        .el-upload{
+                            height:100%;
+                            width: 100%;
+                            .el-upload-dragger{
+                                height:100%;
+                                width: 100%;
+                            }
+                        }
+                        .el-upload__tip{
+                            font-size: 10px;
+                        }
+                    }
+                }
+                .file_uploader{
+                    margin-top: 30px;
+                    height:150px;
+                    width: 300px;
+                    ::v-deep(){
+                        .el-upload{
+                            height:100%;
+                            width: 100%;
+                            .el-upload-dragger{
+                                height:100%;
+                                width: 100%;
+                                .el-icon--upload{
+                                    font-size: 16px;
+                                }
+                                .el-upload__text{
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                        .el-upload__tip{
+                            font-size: 10px;
+                        }
                     }
                 }
             }

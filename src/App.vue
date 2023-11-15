@@ -34,5 +34,5 @@ import { titleChange } from "@/utils/titleChange";
 </script>
 
 <style lang="scss" scoped>
-  
+
 </style>

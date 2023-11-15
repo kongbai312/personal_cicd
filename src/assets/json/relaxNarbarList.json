@@ -29,9 +29,16 @@
     },
     {
         "id" : 5,
-        "title":"网 站",
+        "title":"上 传",
         "img":"https://pic.imgdb.cn/item/64cdf4701ddac507cc076b02.jpg",
-        "path":"/web",
+        "path":"/load",
         "index": 4
+    },
+    {
+        "id" : 6,
+        "title":"网 站",
+        "img":"https://pic.imgdb.cn/item/64cdf4701ddac507cc076ab0.jpg",
+        "path":"/web",
+        "index": 5
     }
 ]
