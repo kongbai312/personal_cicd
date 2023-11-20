@@ -20,7 +20,7 @@ import { onMounted } from 'vue';
 import { L2Dwidget } from 'live2d-widget'; 
 import { useRouter } from 'vue-router';
 import { useUsuallyStore } from '@/stores';
-import ResumePdf from '@/assets/resume/朱博艺前端开发工程师.pdf';
+import ResumePdf from '@/assets/resume/朱博艺-前端开发工程师-13760171072.pdf';
 
 //引入router
 const router = useRouter()
@@ -103,7 +103,7 @@ onMounted(() => {
   const downResume = async() => {
     proxy.$message.warn('即将下载作者的简历')
     //文件名
-    let fileName = '朱博艺前端开发工程师.pdf'
+    let fileName = '朱博艺-前端开发工程师-13760171072.pdf'
     const link = document.createElement('a');
     link.href = ResumePdf
     link.setAttribute('download', fileName);
