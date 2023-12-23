@@ -9,3 +9,6 @@ declare module 'mockjs';
 
 //声明element-plus中文包
 declare module 'element-plus/dist/locale/zh-cn.mjs';
+
+//声明弹幕墙
+declare module 'vue3-danmaku';
