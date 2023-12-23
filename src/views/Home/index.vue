@@ -1,6 +1,6 @@
 <template>
   <div class="home_container">
-    <h1 class="home_title">Swhite's&nbsp;&nbsp;Cabin</h1>
+    <h1 class="home_title">Swhite's&nbsp;&nbsp;Cabin(test自动化部署)</h1>
     <div class="home_navbar">
       <span class="home_navbar_item navbar_item_left" @click="router.push('/personal')">BLOG</span>
       <div class="home_circleContainer">
