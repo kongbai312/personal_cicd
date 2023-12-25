@@ -28,7 +28,7 @@ const router = useRouter()
 //live2d初始化
 const live2dInit = () => {
   window.L2Dwidget.init({
-    pluginRootPath: '/personaltsup/live2d/',//插件在站点上的根目录(相对路径)
+    pluginRootPath: '/live2d/',//插件在站点上的根目录(相对路径)
     pluginJsPath: 'lib/',//脚本文件相对与插件根目录路径
     pluginModelPath: 'live2d-widget-model-shizuku/assets/',//模型文件相对与插件根目录路径
     tagMode: false,//标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
