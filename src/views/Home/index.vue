@@ -96,12 +96,12 @@ onMounted(() => {
   live2dInit()
 })
 
-  //获取实例对象
-  const { proxy } = getCurrentInstance() as any
+  // 在组件中触发全局方法弹出弹窗
+  const { showPopup } = inject('globalMethods') as any;
 
   //简历下载
   const downResume = async() => {
-    proxy.$message.warn('即将下载作者的简历')
+    showPopup().warn('即将下载作者的简历')
     //文件名
     let fileName = '朱博艺-前端开发工程师-13760171072.pdf'
     const link = document.createElement('a');

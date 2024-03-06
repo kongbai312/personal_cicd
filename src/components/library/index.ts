@@ -7,13 +7,20 @@ export default{
         //app上提供，component directive等函数
         //如果要挂载原型 用 app.config.globalProperties的方式
         //如app.config.globalProperties.$https
-        // app.component(XtxSkeleton.name,XtxSkeleton)
-        // app.component(XtxCarousel.name,XtxCarousel)
-        // app.component(XtxMore.name,XtxMore)
-        // app.component(XtxBread.name, XtxBread)
-        // app.component(XtxBreadItem.name, XtxBreadItem)
+        // app.component(Skeleton.name,Skeleton)
 
-        //挂载消息盒子原型
-        app.config.globalProperties.$message = messageObj
+        //挂载消息盒子原型，优化前
+        // app.config.globalProperties.$message = messageObj
+        //优化后
+        //全局方法
+        const globalMethods = {
+            //显示弹窗
+            showPopup() {
+                return messageObj
+            }
+        }
+    
+        //将全局方法提供给后代
+        app.provide('globalMethods', globalMethods)
     }
 }
