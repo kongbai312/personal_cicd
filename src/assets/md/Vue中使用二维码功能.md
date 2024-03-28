@@ -1,3 +1,7 @@
+# Vue中使用二维码功能
+
+前言：做项目时用到二维码分享功能，大致做了一下，以下仅供参考。
+
 ## 一：安装
 
 pnpm add vue@3 qrcode@1 @chenfengyuan/vue-qrcode@2
