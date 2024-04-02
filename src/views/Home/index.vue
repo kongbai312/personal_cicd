@@ -21,7 +21,7 @@ import { L2Dwidget } from 'live2d-widget';
 import { useRouter } from 'vue-router';
 import { useUsuallyStore } from '@/stores';
 import ResumePdf from '@/assets/resume/朱博艺-前端开发工程师-13760171072.pdf';
-
+import axios from 'axios';
 //引入router
 const router = useRouter()
 
@@ -104,12 +104,28 @@ onMounted(() => {
     showPopup().warn('即将下载作者的简历')
     //文件名
     let fileName = '朱博艺-前端开发工程师-13760171072.pdf'
-    const link = document.createElement('a');
-    link.href = ResumePdf
-    link.setAttribute('download', fileName);
-    link.click();
-    //释放url
-    window.URL.revokeObjectURL(link.href)
+    // const link = document.createElement('a');
+    // link.href = ResumePdf
+    // link.setAttribute('download', fileName);
+    // link.click();
+    // //释放url
+    // window.URL.revokeObjectURL(link.href)
+
+    let ResumeUrl = await getResumeUrl()
+
+    window.open(ResumeUrl)
+  }
+
+  //生成url链接
+  const getResumeUrl = async () => {
+    let result = await axios.get(ResumePdf, { responseType: 'blob' })
+    // 创建 File 对象
+    const fileName = 'resume.pdf'
+    const file = new File([result.data], fileName, { type: 'application/pdf' });
+    //生成url
+    let resumeUrl = URL.createObjectURL(file)
+    console.log(resumeUrl)
+    return resumeUrl
   }
 
 </script>
