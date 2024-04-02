@@ -7,7 +7,7 @@
         <div class="home_circle"></div>
         <div class="home_circle_img"></div>
       </div>
-      <span class="home_navbar_item navbar_item_right" @click="downResume">RESUME</span>
+      <span class="home_navbar_item navbar_item_right" @click="resumeClick">RESUME</span>
     </div>
     <div class="home_live2d">
       <canvas id="live2dcanvas" width="600" height="600"></canvas>
@@ -17,11 +17,10 @@
 
 <script setup lang='ts'>
 import { onMounted } from 'vue';
-import { L2Dwidget } from 'live2d-widget'; 
+import { L2Dwidget } from 'live2d-widget';
 import { useRouter } from 'vue-router';
 import { useUsuallyStore } from '@/stores';
-import ResumePdf from '@/assets/resume/朱博艺-前端开发工程师-13760171072.pdf';
-import axios from 'axios';
+
 //引入router
 const router = useRouter()
 
@@ -36,15 +35,15 @@ const live2dInit = () => {
     // name:{
     //   canvas:'live2dcanvas'//自定义cavas标签的id（可不需要,默认live2dcanvas）
     // },
-    model: { 
+    model: {
       jsonPath: import.meta.env.VITE_APP_LIVEPATH,
       // jsonPath: '/public/live2d/live2d-widget-model-shizuku/assets/shizuku.model.json',
       // jsonPath:'/node_modules/live2d-widget-model-shizuku/assets/shizuku.model.json',
       // jsonPath:'https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json',
       // jsonPath: '/live2d/live2d-widget-model-shizuku/assets/shizuku.model.json',
-      scale:1,//模型与canvas的缩放 
+      scale: 1,//模型与canvas的缩放 
     },
-    display: { 
+    display: {
       // superSample: 2, // 超采样等级
       // position: 'right', //显示位置：左或右
       width: 600,// canvas的长度
@@ -59,15 +58,15 @@ const live2dInit = () => {
     // dev:{
     //   border:false,//在canvas周围显示边界
     // },
-    mobile: { 
+    mobile: {
       show: true,//是否在移动设备上显示
       // scale:0.5,//移动设备上的缩放
       motion: true, // 移动设备是否开启重力感应
     },
     log: false,
-    dialog:{
-      enable:false,//显示人物对话框
-      hitokoto:false,//使用一言API
+    dialog: {
+      enable: false,//显示人物对话框
+      hitokoto: false,//使用一言API
     }
   })
 }
@@ -79,11 +78,11 @@ const store = useUsuallyStore()
 const homeLoad = () => {
   console.log(store.isFirstHome)
   //如果是第一次加载首页
-  if(store.isFirstHome === true){
+  if (store.isFirstHome === true) {
     //修改加载状态
     store.setIsFirstHome(false)
   }
-  else{//如果不是第一次加载，说明回退，或者其他
+  else {//如果不是第一次加载，说明回退，或者其他
     //重新加载主页
     location.reload()
     //修改状态 变回第一次加载
@@ -96,173 +95,159 @@ onMounted(() => {
   live2dInit()
 })
 
-  // 在组件中触发全局方法弹出弹窗
-  const { showPopup } = inject('globalMethods') as any;
-
-  //简历下载
-  const downResume = async() => {
-    showPopup().warn('即将下载作者的简历')
-    //文件名
-    let fileName = '朱博艺-前端开发工程师-13760171072.pdf'
-    // const link = document.createElement('a');
-    // link.href = ResumePdf
-    // link.setAttribute('download', fileName);
-    // link.click();
-    // //释放url
-    // window.URL.revokeObjectURL(link.href)
-
-    let ResumeUrl = await getResumeUrl()
-
-    window.open(ResumeUrl)
-  }
-
-  //生成url链接
-  const getResumeUrl = async () => {
-    let result = await axios.get(ResumePdf, { responseType: 'blob' })
-    // 创建 File 对象
-    const fileName = 'resume.pdf'
-    const file = new File([result.data], fileName, { type: 'application/pdf' });
-    //生成url
-    let resumeUrl = URL.createObjectURL(file)
-    console.log(resumeUrl)
-    return resumeUrl
-  }
+//简历点击
+const resumeClick = () => {
+  router.push('/resume')
+}
 
 </script>
 
 <style lang="scss" scoped>
 //动画
-@keyframes img_animation{
-  from{
-    transform:rotate(0deg);
+@keyframes img_animation {
+  from {
+    transform: rotate(0deg);
   }
-  to{
+
+  to {
     transform: rotate(360deg);
   }
 }
-  // 主页容器
-  .home_container{
-    box-sizing: border-box;
-    height: 100vh;
+
+// 主页容器
+.home_container {
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  overflow: hidden;
+
+  //标题
+  .home_title {
+    font-size: 52px;
+  }
+
+  //导航
+  .home_navbar {
+    height: 70px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding-top: 120px;
-    overflow: hidden;
-    //标题
-    .home_title{
-      font-size: 52px;
-    }
-    //导航
-    .home_navbar{
+
+    .home_navbar_item {
+      display: block;
+      box-sizing: border-box;
+      border: 1px solid #333;
+      width: 500px;
       height: 70px;
+      text-align: center;
+      line-height: 70px;
+      cursor: pointer;
+    }
+
+    .home_navbar_item:hover {
+      background-color: #CCC;
+    }
+
+    //中心
+    .home_circleContainer {
+      width: 100px;
+      height: 100px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      .home_navbar_item{
-        display: block;
-        box-sizing: border-box;
-        border: 1px solid #333;
-        width: 500px;
-        height: 70px;
-        text-align: center;
-        line-height: 70px;
-        cursor: pointer;
-      }
-      .home_navbar_item:hover{
-        background-color: #CCC;
-      }
-      //中心
-      .home_circleContainer{
+      position: relative;
+
+      .home_circle {
         width: 100px;
         height: 100px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        .home_circle{
-          width: 100px;
-          height: 100px;
-          background-image: linear-gradient(to right bottom,red 50%,blue 50%);
-          border-radius: 50%;
-          z-index: 2;
-          animation: img_animation 2s linear 0s normal infinite;
-        }
-        .home_circle_img{
-          position: absolute;
-          height: 86px;
-          width: 86px;
-          left: 0;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          margin: auto;
-          background: url(../../assets/images/homeCenter.png) no-repeat;
-          background-size: cover;
-          border-radius: 50%;
-          z-index: 3;
-        }
+        background-image: linear-gradient(to right bottom, red 50%, blue 50%);
+        border-radius: 50%;
+        z-index: 2;
+        animation: img_animation 2s linear 0s normal infinite;
       }
-      
-      .navbar_item_left{
-        border-radius: 40px 0 0 40px;
-        border-right: none;
-        margin-right: -45px;
-      }
-      .navbar_item_right{
-        border-radius: 0 40px 40px 0;
-        border-left: none;
-        margin-left: -45px;
+
+      .home_circle_img {
+        position: absolute;
+        height: 86px;
+        width: 86px;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background: url(../../assets/images/homeCenter.png) no-repeat;
+        background-size: cover;
+        border-radius: 50%;
+        z-index: 3;
       }
     }
-    //live2d
-    .home_live2d{
-      margin-top: 100px;
-      #live2dcanvas{
-        overflow: hidden;
-      }
+
+    .navbar_item_left {
+      border-radius: 40px 0 0 40px;
+      border-right: none;
+      margin-right: -45px;
+    }
+
+    .navbar_item_right {
+      border-radius: 0 40px 40px 0;
+      border-left: none;
+      margin-left: -45px;
     }
   }
 
-  ::v-deep(){
-    //弹窗
-    .el-message-box{
-      width: 50vw !important;
+  //live2d
+  .home_live2d {
+    margin-top: 100px;
+
+    #live2dcanvas {
+      overflow: hidden;
     }
   }
-  @media (max-width: 992px) {
-    .home_container{
-      .home_title{
-        font-size: 26px;
+}
+
+
+@media (max-width: 992px) {
+  .home_container {
+    .home_title {
+      font-size: 26px;
+    }
+
+    // 导航
+    .home_navbar {
+      height: 62px;
+
+      .home_navbar_item {
+        width: 35vw;
+        height: 40px;
+        line-height: 40px;
       }
-      // 导航
-      .home_navbar{
+
+      // 中心
+      .home_circleContainer {
+        width: 62px;
         height: 62px;
-        .home_navbar_item{
-          width: 35vw;
-          height: 40px;
-          line-height: 40px;
-        }
-        // 中心
-        .home_circleContainer{
+
+        .home_circle {
           width: 62px;
           height: 62px;
-          .home_circle{
-            width: 62px;
-            height: 62px;
-          }
-          .home_circle_img{
-            width: 54px;
-            height: 54px;
-          }
         }
-        .navbar_item_left{
-          border-radius: 20px 0 0 20px;
+
+        .home_circle_img {
+          width: 54px;
+          height: 54px;
         }
-        .navbar_item_right{
-          border-radius: 0 20px 20px 0;
-        }
+      }
+
+      .navbar_item_left {
+        border-radius: 20px 0 0 20px;
+      }
+
+      .navbar_item_right {
+        border-radius: 0 20px 20px 0;
       }
     }
   }
-
+}
 </style>

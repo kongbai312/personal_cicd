@@ -1,5 +1,6 @@
 //声明 element - icon
 declare module '@element-plus/icons-vue';
+declare module "element-plus";
 
 //声明打字机包
 declare module 'vue-typed-js';

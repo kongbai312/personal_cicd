@@ -159,6 +159,14 @@ const routes = [
             title:'原生上传页面'
         }
     },
+    //简历跳转页面
+    {
+        path:'/resume',
+        component: () => import('@/views/Home/resume.vue'),
+        meta:{
+            title:'简历'
+        }
+    },
     // 错误页面
     {
         path:'/404',
