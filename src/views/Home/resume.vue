@@ -26,7 +26,7 @@ const downResume = async () => {
 //简历点击
 const previewResume = async () => {
     // 在线预览地址
-    let ResumeUrl = 'https://docs.qq.com/pdf/DR29EaFRaVmtMeXBS';
+    let ResumeUrl = 'https://docs.qq.com/pdf/DR09aaldkemZwRmdw';
     //打开
     window.open(ResumeUrl)
 }
