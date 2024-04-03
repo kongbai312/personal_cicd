@@ -187,11 +187,14 @@
         }
         // 发送
         .leaveword_sent{
+          box-sizing: border-box;
           border: 1px solid #fff;
           padding: 0px 30px;
           height: 80px;
-          line-height: 80px;
-          font-size: 26px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          // font-size: 26px;
           border-radius: 40px;
           color: #eee;
           cursor: url(../../../assets/cursor/link.cur),pointer;
@@ -206,6 +209,27 @@
       .danmu_style{
         height: calc( 100vh - 50px );
         width: 100vw;
+        .danmuItem{
+          .danmuItem_img{
+            min-height: 30px;
+            min-width: 30px;
+          }
+        }
+      }
+      .leaveword_box{
+        .leaveword_title{
+          font-size: 26px;
+        }
+        .leaveword_inputBox{
+          .leaveword_input{
+            min-height: 30px;
+          }
+          .leaveword_sent{
+            min-height: 30px;
+            padding: 0px 5px;
+            min-width: 50px;
+          }
+        }
       }
     }
   }
