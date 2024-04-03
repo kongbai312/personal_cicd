@@ -8,7 +8,7 @@
         :autoplay="false" 
         class="relaxNarbar_carousel" 
         arrow="always"
-        :direction="width <= 400 ? 'vertical' :'horizontal'"
+        :direction="width <= 450 ? 'vertical' :'horizontal'"
       >
         <el-carousel-item class="carouselItem" v-for="item in RelaxNarbarJson" :key="item.id">
           <div class="carouselItem_content" @click="goto(item.path,item.index)">
@@ -121,11 +121,11 @@ import { useRouter } from 'vue-router';
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 450px) {
     .relaxNarbar_container{
       .relaxNarbar_elCard{
         .relaxNarbar_carousel{
-          height: 400px;
+          height: 450px;
           .carouselItem{
             .carouselItem_content{
               .carouselItem_img{
