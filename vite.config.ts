@@ -11,8 +11,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 
 // https://vitejs.dev/config/
-// @ts-ignore
-export default ({ mode }) => {
+export default ({ mode } : { mode: string }) => {
   const env = loadEnv(mode, process.cwd())
   return defineConfig({
     plugins: [

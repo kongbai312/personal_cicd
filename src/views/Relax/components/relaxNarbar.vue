@@ -5,7 +5,7 @@
         @change="change" 
         trigger="click" 
         type="card" 
-        :autoplay="false" 
+        :autoplay="false"
         class="relaxNarbar_carousel" 
         arrow="always"
         :direction="width <= 450 ? 'vertical' :'horizontal'"
