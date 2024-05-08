@@ -1,1 +1,0 @@
-import{cd as a,n as c,f as o,Z as r,N as u}from"./index-78d51c59.js";const f="update:modelValue",p="change",N="input",n={prefix:Math.floor(Math.random()*1e4),current:0},d=Symbol("elIdInjection"),i=()=>r()?u(d,n):n,m=t=>{const e=i(),s=a();return c(()=>o(t)||`${s.value}-id-${e.prefix}-${e.current++}`)};export{p as C,N as I,f as U,i as a,m as u};
