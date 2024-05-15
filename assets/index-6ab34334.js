@@ -1,1 +1,0 @@
-import{cl as a,q as c,f as o,$ as r,O as u}from"./index-d2b4de26.js";const f="update:modelValue",p="change",l="input",n={prefix:Math.floor(Math.random()*1e4),current:0},d=Symbol("elIdInjection"),i=()=>r()?u(d,n):n,m=t=>{const e=i(),s=a();return c(()=>o(t)||`${s.value}-id-${e.prefix}-${e.current++}`)};export{p as C,l as I,f as U,i as a,m as u};
