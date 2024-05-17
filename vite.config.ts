@@ -62,7 +62,8 @@ export default ({ mode } : { mode: string }) => {
       // }
     },
     //github部署
-    base: env.MODE === 'production' ? '/personaltsup/' : './',
+    // base: env.MODE === 'production' ? '/personaltsup/' : './',
+    base: env.MODE === 'production' ? './' : './',
     // base: './',
     // 打包配置
     build: {
