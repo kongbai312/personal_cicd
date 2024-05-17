@@ -97,7 +97,7 @@ onMounted(() => {
 
 //简历点击
 const resumeClick = () => {
-  window.open('http://zby312781556.gitee.io/resume_ol')
+  window.open('https://swhite.work')
 }
 
 </script>
